@@ -1,6 +1,7 @@
 namespace TensorFlowLite
 {
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 
     public class CameraTextureBackground : MonoBehaviour
     {
@@ -20,6 +21,7 @@ namespace TensorFlowLite
                 ? customMaterial
                 : new Material(Shader.Find("Hidden/TFLite/Resize"));
             Material.SetMatrix("_VertTransform", Matrix4x4.identity);
+            Screen.orientation = ScreenOrientation.LandscapeRight;
         }
 
         protected virtual void OnDestroy()
