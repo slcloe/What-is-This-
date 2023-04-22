@@ -20,6 +20,8 @@ namespace TensorFlowLite
         public TextureUpdateEvent OnTextureUpdate = new TextureUpdateEvent();
 
         private TextureResizer resizer;
+        //webCamTexture : current camera Texture
+        //webCamDevice : current device info
         private WebCamTexture webCamTexture;
         private WebCamDevice[] devices;
         private int deviceIndex;
@@ -32,6 +34,7 @@ namespace TensorFlowLite
                 ? editorCameraName
                 : WebCamUtil.FindName(preferKind, isFrontFacing);
 
+            // current device info
             WebCamDevice device = default;
             for (int i = 0; i < devices.Length; i++)
             {
@@ -55,6 +58,7 @@ namespace TensorFlowLite
         {
             if (!webCamTexture.didUpdateThisFrame) return;
 
+            // modify camera size ( not screen size)
             var tex = NormalizeWebcam(webCamTexture, Screen.width, Screen.height, isFrontFacing);
             OnTextureUpdate.Invoke(tex);
         }
@@ -71,10 +75,11 @@ namespace TensorFlowLite
         {
             StopCamera();
             isFrontFacing = device.isFrontFacing;
+            // set camera size
             webCamTexture = new WebCamTexture(device.name, requestSize.x, requestSize.y, requestFps);
             webCamTexture.Play();
         }
-
+        
         private void StopCamera()
         {
             if (webCamTexture == null)

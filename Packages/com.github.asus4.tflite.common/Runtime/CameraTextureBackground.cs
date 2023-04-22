@@ -21,7 +21,7 @@ namespace TensorFlowLite
                 ? customMaterial
                 : new Material(Shader.Find("Hidden/TFLite/Resize"));
             Material.SetMatrix("_VertTransform", Matrix4x4.identity);
-            //Screen.orientation = ScreenOrientation.LandscapeRight;
+            Screen.orientation = ScreenOrientation.LandscapeRight;
         }
 
         protected virtual void OnDestroy()
@@ -32,6 +32,7 @@ namespace TensorFlowLite
             }
         }
 
+        // draw rectangle
         public virtual void SetTexture(Texture texture)
         {
             Material.mainTexture = texture;
