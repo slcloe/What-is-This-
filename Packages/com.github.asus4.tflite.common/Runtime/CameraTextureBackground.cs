@@ -32,6 +32,7 @@ namespace TensorFlowLite
             }
         }
 
+        // draw rectangle
         public virtual void SetTexture(Texture texture)
         {
             Material.mainTexture = texture;
