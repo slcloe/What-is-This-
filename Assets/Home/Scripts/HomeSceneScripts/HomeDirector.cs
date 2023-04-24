@@ -35,6 +35,7 @@ public class HomeDirector : MonoBehaviour
         curPos[3] = 0;
 
         ratio = startPos[0].x * (-1);
+        //Screen.orientation = ScreenOrientation.LandscapeRight;
     }
 
 
