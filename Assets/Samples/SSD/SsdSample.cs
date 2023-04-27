@@ -74,23 +74,38 @@ public class SsdSample : MonoBehaviour
 
         SSD.Result[] results = ssd.GetResults();
         Vector2 size = (frameContainer.transform as RectTransform).rect.size;
+        //int number = 0;
         for (int i = 0; i < 10; i++)
         {
             SetFrame(frames[i], results[i], size);
+
+            //if (results[i].score > scoreThreshold) 
+            //{ 
+            //    Debug.Log("i :  " + (i + 0) + "  name : " + GetLabelName(results[i].classID) + "\n");
+            //}
         }
     }
 
     private void SetFrame(Text frame, SSD.Result result, Vector2 size)
     {
-        if (result.score < scoreThreshold)
+        if (result.score >= scoreThreshold)
+        {
+            frame.gameObject.SetActive(true);
+        }
+        else
         {
             frame.gameObject.SetActive(false);
             return;
         }
-        else
-        {
-            frame.gameObject.SetActive(true);
-        }
+        //if (result.score < scoreThreshold)
+        //{
+        //    frame.gameObject.SetActive(false);
+        //    return;
+        //}
+        //else
+        //{
+        //    frame.gameObject.SetActive(true);
+        //}
 
         frame.text = $"{GetLabelName(result.classID)} : {(int)(result.score * 100)}%";
         var rt = frame.transform as RectTransform;
