@@ -74,7 +74,7 @@ namespace TensorFlowLite
 
             Rect rect = new Rect(0, 0, imageTexture.width, imageTexture.height);
             detection_image = Sprite.Create(imageTexture, rect, Vector2.one * 0.5f);
-            image.sprite = detection_image;
+            //image.sprite = detection_image;
 
             SceneManager.LoadScene(sceneName, mode);
             //DontDestroyOnLoad(detection_image);

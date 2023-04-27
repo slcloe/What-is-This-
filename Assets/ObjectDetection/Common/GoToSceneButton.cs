@@ -47,6 +47,7 @@ namespace TensorFlowLite
 
         void OnButtonClick()
         {
+            Debug.Log("hanseul");
             SceneManager.LoadScene(sceneName, mode);
         }
     }
