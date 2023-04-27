@@ -42,6 +42,13 @@ namespace TensorFlowLite
         {
             image = GetComponent<Image>();
         }
+        private void Update()
+        {
+            bool check = TensorFlowLite.SsdSample.is_set_frame;
+
+            if (check) { OnEnable(); }
+            else { OnDisable(); return; }
+        }
 
         void OnEnable()
         {

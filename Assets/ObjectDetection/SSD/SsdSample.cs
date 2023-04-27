@@ -2,31 +2,35 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(WebCamInput))]
-public class SsdSample : MonoBehaviour
+namespace TensorFlowLite
 {
-    [SerializeField]
-    private SSD.Options options = default;
-
-    [SerializeField]
-    private AspectRatioFitter frameContainer = null;
-
-    [SerializeField]
-    private Text framePrefab = null;
-
-    [SerializeField, Range(0f, 1f)]
-    // 정확도 설정
-    private float scoreThreshold = 0.5f;
-
-    [SerializeField]
-    private TextAsset labelMap = null;
-
-    private SSD ssd;
-    private Text[] frames;
-    private string[] labels;
-
-    private void Start()
+    [RequireComponent(typeof(WebCamInput))]
+    public class SsdSample : MonoBehaviour
     {
+        [SerializeField]
+        private SSD.Options options = default;
+
+        [SerializeField]
+        private AspectRatioFitter frameContainer = null;
+
+        [SerializeField]
+        private Text framePrefab = null;
+
+        [SerializeField, Range(0f, 1f)]
+        // 정확도 설정
+        private float scoreThreshold = 0.5f;
+
+        [SerializeField]
+        private TextAsset labelMap = null;
+
+        private SSD ssd;
+        private Text[] frames;
+        private string[] labels;
+        public static bool is_set_frame = false;
+        public static string detection_text;
+
+        private void Start()
+        {
 #if UNITY_ANDROID && !UNITY_EDITOR
         // This is an example usage of the NNAPI delegate.
         if (options.accelerator == SSD.Accelerator.NNAPI && !Application.isEditor)
@@ -43,83 +47,91 @@ public class SsdSample : MonoBehaviour
         }
         else
 #endif // UNITY_ANDROID && !UNITY_EDITOR
-        {
-            ssd = new SSD(options);
+            {
+                ssd = new SSD(options);
+            }
+
+            // Init frames
+            frames = new Text[10];
+            Transform parent = frameContainer.transform;
+            for (int i = 0; i < frames.Length; i++)
+            {
+                frames[i] = Instantiate(framePrefab, Vector3.zero, Quaternion.identity, parent);
+                frames[i].transform.localPosition = Vector3.zero;
+            }
+
+            // Labels
+            labels = labelMap.text.Split('\n');
+
+            GetComponent<WebCamInput>().OnTextureUpdate.AddListener(Invoke);
         }
 
-        // Init frames
-        frames = new Text[10];
-        Transform parent = frameContainer.transform;
-        for (int i = 0; i < frames.Length; i++)
+        private void OnDestroy()
         {
-            frames[i] = Instantiate(framePrefab, Vector3.zero, Quaternion.identity, parent);
-            frames[i].transform.localPosition = Vector3.zero;
+            GetComponent<WebCamInput>().OnTextureUpdate.RemoveListener(Invoke);
+            ssd?.Dispose();
         }
 
-        // Labels
-        labels = labelMap.text.Split('\n');
+        private bool check_condition(Text frame, SSD.Result result, Vector2 size)
+        {
+            if (result.score >= scoreThreshold)
+                frame.gameObject.SetActive(true);
+            else
+            {
+                frame.gameObject.SetActive(false);
+                return false;
+            }
+            //check frame position
+            return true;
+        }
 
-        GetComponent<WebCamInput>().OnTextureUpdate.AddListener(Invoke);
+        private void Invoke(Texture texture)
+        {
+            ssd.Invoke(texture);
+
+            SSD.Result[] results = ssd.GetResults();
+            Vector2 size = (frameContainer.transform as RectTransform).rect.size;
+            //int number = 0;
+            is_set_frame = false;
+            detection_text = null;
+            for (int i = 0; i < 10; i++)
+            {
+                SetFrame(frames[i], results[i], size);
+
+                //if (results[i].score > scoreThreshold) 
+                //{ 
+                //    Debug.Log("i :  " + (i + 0) + "  name : " + GetLabelName(results[i].classID) + "\n");
+                //}
+            }
+        }
+
+        private void SetFrame(Text frame, SSD.Result result, Vector2 size)
+        {
+            if (result.score >= scoreThreshold && !is_set_frame)
+            {
+                frame.gameObject.SetActive(true);
+                is_set_frame = true;
+            }
+            else
+            {
+                frame.gameObject.SetActive(false);
+                return;
+            }
+            frame.text = $"{GetLabelName(result.classID)}";
+            detection_text = frame.text;
+            var rt = frame.transform as RectTransform;
+            rt.anchoredPosition = result.rect.position * size - size * 0.5f;
+            rt.sizeDelta = result.rect.size * size;
+        }
+
+        private string GetLabelName(int id)
+        {
+            if (id < 0 || id >= labels.Length - 1)
+            {
+                return "?";
+            }
+            return labels[id + 1];
+        }
+
     }
-
-    private void OnDestroy()
-    {
-        GetComponent<WebCamInput>().OnTextureUpdate.RemoveListener(Invoke);
-        ssd?.Dispose();
-    }
-
-    private void Invoke(Texture texture)
-    {
-        ssd.Invoke(texture);
-
-        SSD.Result[] results = ssd.GetResults();
-        Vector2 size = (frameContainer.transform as RectTransform).rect.size;
-        //int number = 0;
-        for (int i = 0; i < 10; i++)
-        {
-            SetFrame(frames[i], results[i], size);
-
-            //if (results[i].score > scoreThreshold) 
-            //{ 
-            //    Debug.Log("i :  " + (i + 0) + "  name : " + GetLabelName(results[i].classID) + "\n");
-            //}
-        }
-    }
-
-    private void SetFrame(Text frame, SSD.Result result, Vector2 size)
-    {
-        if (result.score >= scoreThreshold)
-        {
-            frame.gameObject.SetActive(true);
-        }
-        else
-        {
-            frame.gameObject.SetActive(false);
-            return;
-        }
-        //if (result.score < scoreThreshold)
-        //{
-        //    frame.gameObject.SetActive(false);
-        //    return;
-        //}
-        //else
-        //{
-        //    frame.gameObject.SetActive(true);
-        //}
-
-        frame.text = $"{GetLabelName(result.classID)} : {(int)(result.score * 100)}%";
-        var rt = frame.transform as RectTransform;
-        rt.anchoredPosition = result.rect.position * size - size * 0.5f;
-        rt.sizeDelta = result.rect.size * size;
-    }
-
-    private string GetLabelName(int id)
-    {
-        if (id < 0 || id >= labels.Length - 1)
-        {
-            return "?";
-        }
-        return labels[id + 1];
-    }
-
 }
