@@ -72,7 +72,7 @@
         "Behavior": 0
     },
     "m_FilterOptions": {
-        "m_Filter": "",
+        "m_Filter": "take",
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },
