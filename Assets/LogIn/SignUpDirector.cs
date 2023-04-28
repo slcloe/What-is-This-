@@ -33,10 +33,20 @@ public class SignUpDirector : MonoBehaviour
         input[3] = GameObject.Find("ParentPWInputField").GetComponent<InputField>();
         btSignUp = GameObject.Find("ButtonSignUp").GetComponent<Button>();
 
-        btSignUp.onClick.AddListener(requestSignUp);
+        btSignUp.onClick.AddListener(CheckValidation);
     }
 
-    void requestSignUp()
+
+    void CheckValidation()
+    {
+/*        if (input[0].text == "") Toast.MakeToast("아이디를 입력해주세요.");
+        else if (input[1].text == "") Toast.MakeToast("비밀번호를 입력해주세요.");
+        else if (input[2].text == "") Toast.MakeToast("아이 이름을 입력해주세요.");
+        else if (input[3].text == "") Toast.MakeToast("부모 비밀번호를 입력해주세요.");
+        else */RequestSignUp();
+    }
+
+    void RequestSignUp()
     {
         SignUpInfo info = new SignUpInfo();
         info.userId = input[0].text;
@@ -64,14 +74,21 @@ public class SignUpDirector : MonoBehaviour
             }
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
+
             string text = reader.ReadToEnd();
 
-            Debug.Log(text);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {    
+                Debug.Log(text);
+            } 
+            else
+            {
+                //Toast.MakeToast(text);
+            }
         }
         catch (WebException e)
         {
             Debug.Log(e);
         }
     }
-
 }

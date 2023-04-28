@@ -5,19 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/SSD/SSD.unity
     guid: 97a93d56ec0ff46078e253cebe3c63ee
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Home/Scenes/HomeScene.unity
     guid: 27e7b54ab2ae2114a84bc92b4b88cbe5
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Level2/Level2Scene.unity
     guid: 28e3194509f24e04a9ca8b8626ba73c9
+  - enabled: 1
+    path: Assets/LogIn/SignUpScene.unity
+    guid: 8de5e5aa5e246be40a0f20c1a84870b1
   m_configObjects: {}
