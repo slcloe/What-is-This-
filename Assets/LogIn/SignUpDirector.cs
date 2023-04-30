@@ -21,7 +21,15 @@ public class SignUpInfo
 public class SignUpDirector : MonoBehaviour
 {
     InputField[] input = new InputField[4];
+    Dropdown[] dropdown = new Dropdown[3];
     Button btSignUp;
+
+    Text textDate;
+    string birthDate;
+
+    List<string> yearList = new List<string>();
+    List<string> monthList = new List<string>();
+    List<string> dayList = new List<string>();
 
     static private string apiUrl = "http://121.160.119.135:8081/signup";
 
@@ -31,11 +39,24 @@ public class SignUpDirector : MonoBehaviour
         input[1] = GameObject.Find("PWInputField").GetComponent<InputField>();
         input[2] = GameObject.Find("NameInputField").GetComponent<InputField>();
         input[3] = GameObject.Find("ParentPWInputField").GetComponent<InputField>();
+
+        dropdown[0] = GameObject.Find("YearDropdown").GetComponent<Dropdown>();
+        dropdown[1] = GameObject.Find("MonthDropdown").GetComponent<Dropdown>();
+        dropdown[2] = GameObject.Find("DayDropdown").GetComponent<Dropdown>();
+        InitDropdown();
+
+        textDate = GameObject.Find("TextDate").GetComponent<Text>();
+
         btSignUp = GameObject.Find("ButtonSignUp").GetComponent<Button>();
 
         btSignUp.onClick.AddListener(CheckValidation);
     }
 
+    void Update()
+    {
+        birthDate = yearList[dropdown[0].value] + "-" + monthList[dropdown[1].value] + "-" + dayList[dropdown[2].value];
+        textDate.text = birthDate;
+    }
 
     void CheckValidation()
     {
@@ -52,7 +73,7 @@ public class SignUpDirector : MonoBehaviour
         info.userId = input[0].text;
         info.password = input[1].text;
         info.name = input[2].text;
-        info.birth = "2020-09-04";
+        info.birth = birthDate;
         info.parentPassword = input[3].text;
 
         string str = JsonUtility.ToJson(info);
@@ -80,6 +101,7 @@ public class SignUpDirector : MonoBehaviour
             if (response.StatusCode == HttpStatusCode.OK)
             {    
                 Debug.Log(text);
+                //로그인화면으로 이동
             } 
             else
             {
@@ -90,5 +112,41 @@ public class SignUpDirector : MonoBehaviour
         {
             Debug.Log(e);
         }
+    }
+
+    void InitDropdown()
+    {
+        string yearStr = DateTime.Now.ToString("yyyy");
+        int yearInt = Convert.ToInt32(yearStr);
+
+        for (int i = 0; i < 8; i++)
+        {
+            yearList.Add(yearInt.ToString());
+            dropdown[0].options.Add(new Dropdown.OptionData(yearInt.ToString()));
+            yearInt--;
+        }
+
+        for (int i = 1; i <= 12; i++)
+        {
+            monthList.Add(i.ToString());
+            dropdown[1].options.Add(new Dropdown.OptionData(i.ToString()));
+        }
+
+        for (int i = 1; i <= 31; i++)
+        {
+            dayList.Add(i.ToString());
+            dropdown[2].options.Add(new Dropdown.OptionData(i.ToString()));
+        }
+
+        dropdown[0].value = 0;
+        dropdown[0].Select();
+        dropdown[0].RefreshShownValue();
+        dropdown[1].value = 0;
+        dropdown[1].Select();
+        dropdown[1].RefreshShownValue();
+        dropdown[2].value = 0;
+        dropdown[2].Select();
+        dropdown[2].RefreshShownValue();
+
     }
 }
