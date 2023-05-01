@@ -72,8 +72,6 @@ public class SignUpDirector : MonoBehaviour
 
         string str = JsonUtility.ToJson(info);
 
-        Debug.Log(str);
-
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(str);
 
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
@@ -96,20 +94,15 @@ public class SignUpDirector : MonoBehaviour
 
             string text = reader.ReadToEnd();
 
+            //Toast.MakeToast(text);
             if (response.StatusCode == HttpStatusCode.OK)
             {    
-                Debug.Log(text);
-                //Toast.MakeToast("회원가입이 완료되었습니다.");
                 SceneManager.LoadScene("LoginScene");
             } 
-            else
-            {
-                //Toast.MakeToast(text);
-            }
         }
         catch (WebException e)
         {
-            Debug.Log(e);
+            //Toast.MakeToast("에러 발생");
         }
     }
 

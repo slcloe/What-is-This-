@@ -81,7 +81,7 @@ public class LoginDirector : MonoBehaviour
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                Debug.Log(text);
+                //Toast.MakeToast("로그인되었습니다.");
                 SceneManager.LoadScene("HomeScene");
             }
             else
@@ -91,7 +91,7 @@ public class LoginDirector : MonoBehaviour
         }
         catch (WebException e)
         {
-            Debug.Log(e);
+            //Toast.MakeToast("에러 발생");
         }
     }
 }
