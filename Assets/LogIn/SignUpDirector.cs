@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 using System.IO;
 using System.Net;
@@ -25,7 +26,6 @@ public class SignUpDirector : MonoBehaviour
     Button btSignUp;
 
     Text textDate;
-    string birthDate;
 
     List<string> yearList = new List<string>();
     List<string> monthList = new List<string>();
@@ -52,12 +52,6 @@ public class SignUpDirector : MonoBehaviour
         btSignUp.onClick.AddListener(CheckValidation);
     }
 
-    void Update()
-    {
-        birthDate = yearList[dropdown[0].value] + "-" + monthList[dropdown[1].value] + "-" + dayList[dropdown[2].value];
-        textDate.text = birthDate;
-    }
-
     void CheckValidation()
     {
 /*        if (input[0].text == "") Toast.MakeToast("아이디를 입력해주세요.");
@@ -73,10 +67,12 @@ public class SignUpDirector : MonoBehaviour
         info.userId = input[0].text;
         info.password = input[1].text;
         info.name = input[2].text;
-        info.birth = birthDate;
+        info.birth = yearList[dropdown[0].value] + "-" + monthList[dropdown[1].value] + "-" + dayList[dropdown[2].value]; ;
         info.parentPassword = input[3].text;
 
         string str = JsonUtility.ToJson(info);
+
+        Debug.Log(str);
 
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(str);
 
@@ -84,6 +80,7 @@ public class SignUpDirector : MonoBehaviour
         request.Method = "POST";
         request.ContentType = "application/json";
         request.ContentLength = bytes.Length;
+
 
         try
         {
@@ -93,6 +90,7 @@ public class SignUpDirector : MonoBehaviour
                 stream.Flush();
                 stream.Close();
             }
+
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
 
@@ -101,7 +99,8 @@ public class SignUpDirector : MonoBehaviour
             if (response.StatusCode == HttpStatusCode.OK)
             {    
                 Debug.Log(text);
-                //로그인화면으로 이동
+                //Toast.MakeToast("회원가입이 완료되었습니다.");
+                SceneManager.LoadScene("HomeScene");
             } 
             else
             {
@@ -147,6 +146,5 @@ public class SignUpDirector : MonoBehaviour
         dropdown[2].value = 0;
         dropdown[2].Select();
         dropdown[2].RefreshShownValue();
-
     }
 }
