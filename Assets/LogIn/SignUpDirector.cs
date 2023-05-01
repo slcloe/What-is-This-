@@ -67,7 +67,7 @@ public class SignUpDirector : MonoBehaviour
         info.userId = input[0].text;
         info.password = input[1].text;
         info.name = input[2].text;
-        info.birth = yearList[dropdown[0].value] + "-" + monthList[dropdown[1].value] + "-" + dayList[dropdown[2].value]; ;
+        info.birth = yearList[dropdown[0].value] + "-" + monthList[dropdown[1].value].PadLeft(2, '0') + "-" + dayList[dropdown[2].value].PadLeft(2, '0');
         info.parentPassword = input[3].text;
 
         string str = JsonUtility.ToJson(info);
@@ -100,7 +100,7 @@ public class SignUpDirector : MonoBehaviour
             {    
                 Debug.Log(text);
                 //Toast.MakeToast("회원가입이 완료되었습니다.");
-                SceneManager.LoadScene("HomeScene");
+                SceneManager.LoadScene("LoginScene");
             } 
             else
             {
