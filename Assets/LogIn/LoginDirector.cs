@@ -23,7 +23,6 @@ public class LoginDirector : MonoBehaviour
     InputField pwInput;
 
     Button btLogin;
-    Button btSignUp;
 
     static private string apiUrl = "http://121.160.119.135:8081/login";
 
@@ -33,15 +32,8 @@ public class LoginDirector : MonoBehaviour
         pwInput = GameObject.Find("PWInputField").GetComponent<InputField>();
 
         btLogin = GameObject.Find("ButtonLogin").GetComponent<Button>();
-        btSignUp = GameObject.Find("ButtonSignUp").GetComponent<Button>();
 
         btLogin.onClick.AddListener(CheckValidation);
-        btSignUp.onClick.AddListener(GotoSignUp);
-    }
-
-    void GotoSignUp()
-    {
-        SceneManager.LoadScene("SignUpScene");
     }
 
     void CheckValidation()
