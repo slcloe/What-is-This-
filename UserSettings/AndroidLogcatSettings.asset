@@ -1,59 +1,23 @@
 {
-    "m_SelectedDeviceId": "28eb0cbc683f7ece",
+    "m_SelectedDeviceId": "R3CN80ZESGE",
     "m_SelectedPackage": {
-        "deviceId": "28eb0cbc683f7ece",
-        "name": "com.asus4.whatisthis",
-        "processId": 18907,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 17839,
-            "exited": false
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.tfliteunitysample",
+            "processId": 29944,
+            "exited": true
         },
         {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 19267,
-            "exited": false
-        },
-        {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 7189,
-            "exited": false
-        },
-        {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 10577,
-            "exited": false
-        },
-        {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 14617,
-            "exited": false
-        },
-        {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 15407,
-            "exited": false
-        },
-        {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 18739,
-            "exited": false
-        },
-        {
-            "deviceId": "28eb0cbc683f7ece",
-            "name": "com.asus4.whatisthis",
-            "processId": 18907,
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.tfliteunitysample",
+            "processId": 29036,
             "exited": false
         }
     ],
