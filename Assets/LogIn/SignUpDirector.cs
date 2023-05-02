@@ -25,8 +25,6 @@ public class SignUpDirector : MonoBehaviour
     Dropdown[] dropdown = new Dropdown[3];
     Button btSignUp;
 
-    Text textDate;
-
     List<string> yearList = new List<string>();
     List<string> monthList = new List<string>();
     List<string> dayList = new List<string>();
@@ -44,8 +42,6 @@ public class SignUpDirector : MonoBehaviour
         dropdown[1] = GameObject.Find("MonthDropdown").GetComponent<Dropdown>();
         dropdown[2] = GameObject.Find("DayDropdown").GetComponent<Dropdown>();
         InitDropdown();
-
-        textDate = GameObject.Find("TextDate").GetComponent<Text>();
 
         btSignUp = GameObject.Find("ButtonSignUp").GetComponent<Button>();
 
@@ -97,7 +93,7 @@ public class SignUpDirector : MonoBehaviour
             //Toast.MakeToast(text);
             if (response.StatusCode == HttpStatusCode.OK)
             {    
-                SceneManager.LoadScene("LoginScene");
+                SceneManager.LoadScene("MainScene");
             } 
         }
         catch (WebException e)
