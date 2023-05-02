@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -496,6 +496,7 @@ MonoBehaviour:
   - pumpkin: {fileID: 21300000, guid: 1fcbb7f72b5bea94fbe961af6b29407d, type: 3}
   - pumpkin: {fileID: 21300000, guid: 40abfcdead3d7ed41a75f7f100fef191, type: 3}
   - pumpkin: {fileID: 21300000, guid: 7520f3b99c4f589479f966f111ea55ac, type: 3}
+  - pumpkin: {fileID: 21300000, guid: 5d5dbb661e7255b42b6464485a83b67c, type: 3}
 --- !u!1 &461142017
 GameObject:
   m_ObjectHideFlags: 0
