@@ -33,7 +33,7 @@ public class Word
 [Serializable]
 public class GetWordResponse
 {
-    public List<Item> wordList;
+    public List<Item> words;
 }
 
 public static class UserInfo
@@ -61,11 +61,10 @@ public static class UserInfo
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
-            string json2 = "{\"wordList\":" + json + "}";
 
-            GetWordResponse data = JsonUtility.FromJson<GetWordResponse>(json2);
+            GetWordResponse data = JsonUtility.FromJson<GetWordResponse>(json);
 
-            return data.wordList;
+            return data.words;
         }
         catch (WebException e)
         {
