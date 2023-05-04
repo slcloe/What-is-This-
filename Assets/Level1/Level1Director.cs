@@ -9,7 +9,7 @@ public class Level1Director : MonoBehaviour
 {
     Text learning_word;
     Image learning_img;
-
+    //Text[] option = new Text[3];
 
     void Start()
     {
