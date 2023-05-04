@@ -10,6 +10,8 @@ public class Level2Director : MonoBehaviour
     Button btSound;
     Button btSpeech;
     Image timer;
+    Image learning_img;
+    Text learning_word;
 
     private float time_start;
     private float time_current;
@@ -19,6 +21,7 @@ public class Level2Director : MonoBehaviour
     AudioClip recordClip = null;
 
     string filePath;
+    string word = TensorFlowLite.SsdSample.detection_text;
 
     void Start()
     {
@@ -26,7 +29,11 @@ public class Level2Director : MonoBehaviour
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         btSpeech = GameObject.Find("ButtonSpeech").GetComponent<Button>();
         timer = GameObject.Find("Timer").GetComponent<Image>();
+        learning_word = GameObject.Find("TextWord").GetComponent<Text>();
+        learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
+        learning_word.text = word;
+        learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
         SetOnClickListener();
         SpeakCommand();
     }
@@ -63,7 +70,7 @@ public class Level2Director : MonoBehaviour
 
     void SpeakSound()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("°í¾çÀÌ"));
+        audioSource.PlayOneShot(TTS.GetAudio(word));
     }
     void StartSpeech()
     {
