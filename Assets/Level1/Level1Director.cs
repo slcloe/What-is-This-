@@ -11,6 +11,7 @@ public class Level1Director : MonoBehaviour
     Image learning_img;
     Text[] option = new Text[3];
     string word = TensorFlowLite.SsdSample.detection_text;
+    Consonant consonant;
 
     void Start()
     {
@@ -24,10 +25,16 @@ public class Level1Director : MonoBehaviour
         //
         //if (word == null ) { word = string.Empty; }
         //learning_word.text = word;
+        //consonant = new Consonant(word);
+        //string[] strs = new string[3];
+        //strs = consonant.get_words();
+        //option[0].text = strs[0];
+        //option[1].text = strs[1];
+        //option[2].text = strs[2];
+
         option[0].text = word;
         option[1].text = word;
         option[2].text = word;
-
 
         learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
     }
