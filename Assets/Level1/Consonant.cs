@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,18 +10,33 @@ namespace TensorFlowLite
     {
         int text_len = 0;
         string word;
+        string[] strs = new string[3];
         //List<letter> lst = new List<letter>();
         //List<letter> lst2 = new List<letter>();
         //List<letter> lst3 = new List<letter>();
-        List<letter>[] lst = new List<letter>[3];
+        List<letter> lst = new List<letter>();
+        List<letter> lst1 = new List<letter>();
+        List<letter> lst2 = new List<letter>();
 
         public Consonant(string text) 
         {
             word = text;
             set_string_idx(text);
-            set_letter_simil(lst[1]);
-            set_letter_simil(lst[2]);
+            set_letter_simil(lst1);
+            set_letter_simil(lst2);
+            //strs[0] = get_text(lst);
+            //strs[1] = get_text(lst1);
+            //strs[2] = get_text(lst2);
+            set_words();
         }
+
+        public string get_word(int idx)
+        {
+            if (idx < 0 || idx > strs.Length) { return null; }
+            return strs[idx];
+        }
+
+
         public struct letter
         {
             public int[] idx;
@@ -35,9 +51,9 @@ namespace TensorFlowLite
         {
             foreach(char ch in text)
             {
-                lst[0].Add(set_letter_idx(ch));
-                lst[1].Add(set_letter_idx(ch));
-                lst[2].Add(set_letter_idx(ch));
+                lst.Add(set_letter_idx(ch));
+                lst1.Add(set_letter_idx(ch));
+                lst2.Add(set_letter_idx(ch));
                 text_len++;
             }
         }
@@ -51,21 +67,20 @@ namespace TensorFlowLite
         }
         void set_letter_simil(List<letter> letters)
         {
-            System.Random r = new System.Random();
-            int order = r.Next(0, text_len - 1);
-            int jamo = r.Next(2);
+            int order = UnityEngine.Random.Range(0, text_len - 1);
+            int jamo = UnityEngine.Random.Range(0, 2);
             if (jamo == 2 && letters[order].idx[2] == 0)
                 jamo = 0;
             int idx = 0;
             do
             {
                 if (jamo == 0)
-                    idx = r.Next(0, 18);
+                    idx = UnityEngine.Random.Range(0, 19);
                 else if (jamo == 1)
-                    idx = r.Next(0, 20);
+                    idx = UnityEngine.Random.Range(0, 21);   
                 else
-                    idx = r.Next(1, 27);
-            } while (lst[0][order].idx[jamo] == idx);
+                    idx = UnityEngine.Random.Range(1, 28);
+            } while (lst[order].idx[jamo] == idx);
             letters[order].idx[jamo] = idx;
         }
         char get_letter(letter ltr)
@@ -81,56 +96,52 @@ namespace TensorFlowLite
             }
             return str;
         }
-        public string[] get_words()
+        void set_words()
         {
-            string[] strs = new string[3];
-            System.Random r = new System.Random();
-            int tmp = r.Next(1, 4);
-            int tmp1 = r.Next(1, 3);
+            int tmp = UnityEngine.Random.Range(1, 4);
+            int tmp1 = UnityEngine.Random.Range(1, 3);
             if (tmp == 1)
             {
-                strs[1] = get_text(lst[0]);
+                strs[0] = get_text(lst);
                 if (tmp1 == 1)
                 {
-                    strs[2] = get_text(lst[1]);
-                    strs[3] = get_text(lst[2]);
+                    strs[1] = get_text(lst1);
+                    strs[2] = get_text(lst2);
                 }
                 else
                 {
-					strs[2] = get_text(lst[2]);
-					strs[3] = get_text(lst[1]);
+					strs[2] = get_text(lst2);
+					strs[1] = get_text(lst1);
 				}
             }
             else if (tmp == 2)
             {
-                strs[1] = get_text(lst[1]);
+                strs[0] = get_text(lst1);
                 if (tmp1 == 1)
                 {
-					strs[2] = get_text(lst[0]);
-					strs[3] = get_text(lst[2]);
+					strs[1] = get_text(lst);
+					strs[2] = get_text(lst2);
 				}
                 else
                 {
-					strs[2] = get_text(lst[2]);
-					strs[3] = get_text(lst[0]);
+					strs[2] = get_text(lst2);
+					strs[1] = get_text(lst);
 				}
             }
             else
             {
-                strs[1] = get_text(lst[2]);
+                strs[0] = get_text(lst2);
                 if (tmp1 == 1)
                 {
-					strs[2] = get_text(lst[0]);
-					strs[3] = get_text(lst[1]);
+					strs[2] = get_text(lst);
+					strs[1] = get_text(lst1);
 				}
                 else
                 {
-					strs[2] = get_text(lst[1]);
-					strs[3] = get_text(lst[0]);
+					strs[2] = get_text(lst1);
+					strs[1] = get_text(lst);
 				}
             }
-
-            return strs;
         }
     }
 }
