@@ -50,15 +50,23 @@ public static class STT
     private static string apiUrl = "https://speech.googleapis.com/v1/speech:recognize?key="+ApiKeys.Google_API_key;
     static SetSTT stt;
 
-    public static void SendAudio(string filePath)
+    public static string SendAudio(string filePath)
     {
         InitData(filePath);
         string response = RequestSTT(stt);
         if (response != null)
         {
             GetSTTContent data = JsonUtility.FromJson<GetSTTContent>(response);
+            if (data == null) return null;
+            if (data.results == null) return null;
             STTAlternative alt = data.results[0].alternatives[0];
+            if (alt == null) return null;
             Debug.Log("word: " + alt.transcript + " / confidence:" + alt.confidence);
+            return alt.transcript;
+        }
+        else
+        {
+            return null;
         }
     }
 
