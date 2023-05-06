@@ -122,6 +122,12 @@ namespace TensorFlowLite
             var rt = frame.transform as RectTransform;
             rt.anchoredPosition = result.rect.position * size - size * 0.5f;
             rt.sizeDelta = result.rect.size * size;
+            if (rt.sizeDelta.x > 756 || rt.sizeDelta.y > 433)
+            {
+				frame.gameObject.SetActive(false);
+				is_set_frame = false;
+				return;
+			}
         }
 
         private string GetLabelName(int id)
