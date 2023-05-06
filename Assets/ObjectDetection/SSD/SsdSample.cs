@@ -93,7 +93,7 @@ namespace TensorFlowLite
             Vector2 size = (frameContainer.transform as RectTransform).rect.size;
             //int number = 0;
             is_set_frame = false;
-            detection_text = null;
+            detection_text = "";
             for (int i = 0; i < 10; i++)
             {
                 SetFrame(frames[i], results[i], size);
