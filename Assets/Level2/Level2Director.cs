@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class Level2Director : MonoBehaviour
 {
     AudioSource audioSource;
-    PopUpDirector popupDirector;
+    Level2PopUpDirector popupDirector;
 
-    Text textWord;
     Button btSound;
     Button btSpeech;
     Image timer;
@@ -29,20 +28,17 @@ public class Level2Director : MonoBehaviour
     void Start()
     {
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
-        popupDirector = GameObject.Find("PopUpDirector").GetComponent<PopUpDirector>();
-        textWord = GameObject.Find("TextWord").GetComponent<Text>();
+        popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level2PopUpDirector>();
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         btSpeech = GameObject.Find("ButtonSpeech").GetComponent<Button>();
         timer = GameObject.Find("Timer").GetComponent<Image>();
         learning_word = GameObject.Find("TextWord").GetComponent<Text>();
         learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
-
         learning_word.text = word;
         learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
-        //GetWord();
         SetOnClickListener();
-        SpeakCommand();
+        SpeakCommand();        
     }
     void Update()
     {
@@ -65,17 +61,11 @@ public class Level2Director : MonoBehaviour
                 }
                 else
                 {
-                    popupDirector.ShowPopUp(result, word);
+                    popupDirector.ShowPopUp(result==word);
                 }
             }
         }
 
-    }
-
-    void GetWord()
-    {
-        word = "고양이";
-        textWord.text = word;
     }
 
     void SetOnClickListener()
@@ -95,13 +85,8 @@ public class Level2Director : MonoBehaviour
     }
     void StartSpeech()
     {
-        //���ϱ� ��ư ��Ȱ��ȭ
         btSpeech.interactable = false;
-
-        //���� ����
         recordClip = Microphone.Start(Microphone.devices[0], false, 5, 16000);
-
-        //Ÿ�̸� ���۽ð� ����
         ResetTimer();
     }
     void ResetTimer()

@@ -11,9 +11,10 @@ public class Level1Director : MonoBehaviour
     Image learning_img;
     Text[] option = new Text[3];
     string word = TensorFlowLite.SsdSample.detection_text;
-	
 
-	void Start()
+    Level1PopUpDirector popupDirector;
+
+    void Start()
     {
         learning_word = GameObject.Find("learning_word").GetComponent<Text>();
         learning_img = GameObject.Find("learning_img").GetComponent<Image>();
@@ -22,10 +23,12 @@ public class Level1Director : MonoBehaviour
         option[1] = GameObject.Find("Button_learn2").GetComponentInChildren<Text>();
         option[2] = GameObject.Find("Button_learn3").GetComponentInChildren<Text>();
 
-		//
-		//if (word == null ) { word = string.Empty; }
-		//learning_word.text = word;
-		string[] strs = new string[3];
+        popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level1PopUpDirector>();
+
+        //
+        //if (word == null ) { word = string.Empty; }
+        //learning_word.text = word;
+        string[] strs = new string[3];
 		TensorFlowLite.Consonant cons = new TensorFlowLite.Consonant(word);
         //strs = cons.get_words();
         //option[0].text = strs[0];
