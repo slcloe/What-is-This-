@@ -16,6 +16,17 @@ public class LoginInfo
     public string parentPassword;
 }
 
+[Serializable]
+public class LoginResponse
+{
+    public int idx;
+    public string userId;
+    public string password;
+    public string name;
+    public string birth;
+    public string parentPassword;
+
+}
 
 public class LoginDirector : MonoBehaviour
 {
@@ -69,12 +80,15 @@ public class LoginDirector : MonoBehaviour
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
 
-            string text = reader.ReadToEnd();
+            string json = reader.ReadToEnd();
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 //Toast.MakeToast("로그인되었습니다.");
                 SceneManager.LoadScene("HomeScene");
+
+                LoginResponse data = JsonUtility.FromJson<LoginResponse>(json);
+                UserInfo.SetUserIdx(data.idx);
             }
             else
             {
