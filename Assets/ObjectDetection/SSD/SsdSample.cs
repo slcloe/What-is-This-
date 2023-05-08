@@ -93,7 +93,7 @@ namespace TensorFlowLite
             Vector2 size = (frameContainer.transform as RectTransform).rect.size;
             //int number = 0;
             is_set_frame = false;
-            detection_text = null;
+            detection_text = "";
             for (int i = 0; i < 10; i++)
             {
                 SetFrame(frames[i], results[i], size);
@@ -122,6 +122,31 @@ namespace TensorFlowLite
             var rt = frame.transform as RectTransform;
             rt.anchoredPosition = result.rect.position * size - size * 0.5f;
             rt.sizeDelta = result.rect.size * size;
+            //Debug.Log("cloe class id :  " + frame.text);
+            //Debug.Log("cloe size x : y " + rt.sizeDelta.x + " "+ rt.sizeDelta.y);
+            //Debug.Log("cloe anchoredPosition x : y" + rt.anchoredPosition.x + " " + rt.anchoredPosition.y);
+   //         float minX = rt.anchoredPosition.x;
+   //         float maxX = rt.anchoredPosition.x + rt.sizeDelta.x;
+   //         float minY = rt.anchoredPosition.y;
+   //         float maxY = rt.anchoredPosition.y - rt.sizeDelta.y;
+   //         if (minX < -689 || maxX > 68)
+   //         {
+			//	frame.gameObject.SetActive(false);
+			//	is_set_frame = false;
+			//	return;
+			//}
+   //         if (minY > 214 || maxY < -216)
+   //         {
+			//	frame.gameObject.SetActive(false);
+			//	is_set_frame = false;
+			//	return;
+			//}
+            if (rt.sizeDelta.x > 756 || rt.sizeDelta.y > 433)
+            {
+				frame.gameObject.SetActive(false);
+				is_set_frame = false;
+				return;
+			}
         }
 
         private string GetLabelName(int id)

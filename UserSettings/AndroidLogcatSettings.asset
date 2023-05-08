@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "R3CN80ZESGE",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "R3CN80ZESGE",
+        "name": "com.asus4.whatisthis",
+        "processId": 13840,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -18,6 +18,72 @@
             "deviceId": "R3CN80ZESGE",
             "name": "com.asus4.tfliteunitysample",
             "processId": 29036,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 30810,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 31364,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 32146,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 1440,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 2980,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 3901,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 6874,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 8026,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 10505,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 12364,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CN80ZESGE",
+            "name": "com.asus4.whatisthis",
+            "processId": 13840,
             "exited": false
         }
     ],

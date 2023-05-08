@@ -12,6 +12,8 @@ public class Level2Director : MonoBehaviour
     Button btSound;
     Button btSpeech;
     Image timer;
+    Image learning_img;
+    Text learning_word;
 
     private float time_start;
     private float time_current;
@@ -21,7 +23,8 @@ public class Level2Director : MonoBehaviour
     AudioClip recordClip = null;
 
     string filePath;
-    string word;
+    string word = TensorFlowLite.SsdSample.detection_text;
+
 
     void Start()
     {
@@ -31,8 +34,13 @@ public class Level2Director : MonoBehaviour
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         btSpeech = GameObject.Find("ButtonSpeech").GetComponent<Button>();
         timer = GameObject.Find("Timer").GetComponent<Image>();
+        learning_word = GameObject.Find("TextWord").GetComponent<Text>();
+        learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
-        GetWord();
+
+        learning_word.text = word;
+        learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
+        //GetWord();
         SetOnClickListener();
         SpeakCommand();
     }
@@ -53,7 +61,7 @@ public class Level2Director : MonoBehaviour
                 string result = STT.SendAudio(filePath);
                 if(result == null)
                 {
-                    audioSource.PlayOneShot(TTS.GetAudio("´Ù½Ã ¸»ÇØº¸¼¼¿ä."));
+                    audioSource.PlayOneShot(TTS.GetAudio("ë‹¤ì‹œ ë§í•´ë³´ì„¸ìš”."));
                 }
                 else
                 {
@@ -66,7 +74,7 @@ public class Level2Director : MonoBehaviour
 
     void GetWord()
     {
-        word = "°¡¹æ";
+        word = "ê³ ì–‘ì´";
         textWord.text = word;
     }
 
@@ -78,7 +86,7 @@ public class Level2Director : MonoBehaviour
 
     void SpeakCommand()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("µû¶ó ¸»ÇØº¸¼¼¿ä."));
+        audioSource.PlayOneShot(TTS.GetAudio("ë”°ë¼ ë§í•´ë³´ì„¸ìš”."));
     }
 
     void SpeakSound()
@@ -87,13 +95,13 @@ public class Level2Director : MonoBehaviour
     }
     void StartSpeech()
     {
-        //¸»ÇÏ±â ¹öÆ° ºñÈ°¼ºÈ­
+        //ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­
         btSpeech.interactable = false;
 
-        //³ìÀ½ ½ÃÀÛ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         recordClip = Microphone.Start(Microphone.devices[0], false, 5, 16000);
 
-        //Å¸ÀÌ¸Ó ½ÃÀÛ½Ã°£ ¼³Á¤
+        //Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½Û½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
         ResetTimer();
     }
     void ResetTimer()

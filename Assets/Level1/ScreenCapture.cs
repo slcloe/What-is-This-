@@ -66,7 +66,7 @@ namespace TensorFlowLite
 
             Rect area = new Rect(0f, 0f, 2400, 1080);
             screenTex.ReadPixels(area, 0, 0);
-            Debug.Log("take a photo");
+            //Debug.Log("take a photo");
 
             Texture2D imageTexture = new Texture2D(1, 1, TextureFormat.RGB24, false);
             byte[] texBuffer = screenTex.EncodeToPNG();
@@ -74,8 +74,11 @@ namespace TensorFlowLite
 
             Rect rect = new Rect(0, 0, imageTexture.width, imageTexture.height);
             detection_image = Sprite.Create(imageTexture, rect, Vector2.one * 0.5f);
-            //image.sprite = detection_image;
+			//image.sprite = detection_image;
 
+			string word = TensorFlowLite.SsdSample.detection_text;
+            if (word.Equals(""))
+                return;
             SceneManager.LoadScene(sceneName, mode);
             //DontDestroyOnLoad(detection_image);
         }
