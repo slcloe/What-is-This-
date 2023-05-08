@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PopUpDirector : MonoBehaviour
+public class Level1PopUpDirector : MonoBehaviour
 {
     GameObject popup;
     Text successFailure;
@@ -22,11 +22,12 @@ public class PopUpDirector : MonoBehaviour
         popup.SetActive(false);
     }
 
-    public void ShowPopUp(string sayWord, string word)
+    public void ShowPopUp(bool success)
     {
         Color color;
         popup.SetActive(true);
-        if (sayWord == word) {
+        if (success)
+        {
             successFailure.text = "¼º°ø!";
             ColorUtility.TryParseHtmlString("#039508", out color);
             successFailure.color = color;
@@ -39,7 +40,7 @@ public class PopUpDirector : MonoBehaviour
             successFailure.color = color;
             textDirectionObject.SetActive(false);
             btNextObject.SetActive(false);
-            Invoke("SwitchToFailure", 3);
+            Invoke("SwitchToFailure", 1);
         }
     }
 
@@ -53,8 +54,8 @@ public class PopUpDirector : MonoBehaviour
 
     void GotoLevel3()
     {
-        //SceneManager.LoadScene("Level3Scene");
-        Debug.Log("load level3 scene");
+        //SceneManager.LoadScene("Level2Scene");
+        Debug.Log("load level2 scene");
     }
     void GotoObjectDetection()
     {
