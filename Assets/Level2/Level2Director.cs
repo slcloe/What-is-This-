@@ -40,7 +40,7 @@ public class Level2Director : MonoBehaviour
 
         learning_word.text = word;
         learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
-        GetWord();
+        //GetWord();
         SetOnClickListener();
         SpeakCommand();
     }
@@ -61,7 +61,7 @@ public class Level2Director : MonoBehaviour
                 string result = STT.SendAudio(filePath);
                 if(result == null)
                 {
-                    audioSource.PlayOneShot(TTS.GetAudio("�ٽ� ���غ�����."));
+                    audioSource.PlayOneShot(TTS.GetAudio("다시 말해보세요."));
                 }
                 else
                 {
@@ -74,7 +74,7 @@ public class Level2Director : MonoBehaviour
 
     void GetWord()
     {
-        word = "����";
+        word = "고양이";
         textWord.text = word;
     }
 
@@ -86,7 +86,7 @@ public class Level2Director : MonoBehaviour
 
     void SpeakCommand()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("���� ���غ�����."));
+        audioSource.PlayOneShot(TTS.GetAudio("따라 말해보세요."));
     }
 
     void SpeakSound()
