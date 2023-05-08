@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Level2Director : MonoBehaviour
 {
     AudioSource audioSource;
+    PopUpDirector popupDirector;
 
+    Text textWord;
     Button btSound;
     Button btSpeech;
     Image timer;
@@ -19,14 +21,18 @@ public class Level2Director : MonoBehaviour
     AudioClip recordClip = null;
 
     string filePath;
+    string word;
 
     void Start()
     {
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
+        popupDirector = GameObject.Find("PopUpDirector").GetComponent<PopUpDirector>();
+        textWord = GameObject.Find("TextWord").GetComponent<Text>();
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         btSpeech = GameObject.Find("ButtonSpeech").GetComponent<Button>();
         timer = GameObject.Find("Timer").GetComponent<Image>();
 
+        GetWord();
         SetOnClickListener();
         SpeakCommand();
     }
@@ -44,10 +50,24 @@ public class Level2Director : MonoBehaviour
                 isRecording = false;
                 btSpeech.interactable = true;
                 StopRecording();
-                STT.SendAudio(filePath);
+                string result = STT.SendAudio(filePath);
+                if(result == null)
+                {
+                    audioSource.PlayOneShot(TTS.GetAudio("다시 말해보세요."));
+                }
+                else
+                {
+                    popupDirector.ShowPopUp(result, word);
+                }
             }
         }
 
+    }
+
+    void GetWord()
+    {
+        word = "가방";
+        textWord.text = word;
     }
 
     void SetOnClickListener()
@@ -63,7 +83,7 @@ public class Level2Director : MonoBehaviour
 
     void SpeakSound()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("고양이"));
+        audioSource.PlayOneShot(TTS.GetAudio(word));
     }
     void StartSpeech()
     {
@@ -98,6 +118,4 @@ public class Level2Director : MonoBehaviour
             SavWav.Save(filePath, recordClip);
         }
     }
-
-
 }
