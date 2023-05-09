@@ -10,6 +10,7 @@ public class Level0Director : MonoBehaviour
 
     Button btSound;
     Text textWord;
+    Image learning_img;
 
     string word;
 
@@ -18,8 +19,11 @@ public class Level0Director : MonoBehaviour
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         textWord = GameObject.Find("TextWord").GetComponent<Text>();
+		learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
-        SetWord();
+		learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
+
+		SetWord();
         SetOnClickListener();
         SpeakCommand();
         Invoke("SpeakSound", 2);
@@ -27,7 +31,7 @@ public class Level0Director : MonoBehaviour
 
     void SetWord()
     {
-        string getword = "°í¾çÀÌ";
+        string getword = TensorFlowLite.SsdSample.detection_text;
         word = getword;
         textWord.text = word;
     }

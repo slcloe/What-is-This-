@@ -839,8 +839,8 @@ GameObject:
   - component: {fileID: 1278735549}
   - component: {fileID: 1278735552}
   - component: {fileID: 1278735551}
+  - component: {fileID: 1278735553}
   - component: {fileID: 1278735550}
-  - component: {fileID: 1278735554}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -950,7 +950,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278735548}
   m_CullTransparentMesh: 1
---- !u!114 &1278735554
+--- !u!114 &1278735553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1375,7 +1375,7 @@ PrefabInstance:
     - target: {fileID: 7719925103924872090, guid: c3ad31ccc59b04ac782aaabae2b9706b,
         type: 3}
       propertyPath: sceneName
-      value: Assets/Home/Scenes/HomeScene.unity
+      value: Assets/Level1/Level1Scene.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7719925103924872094, guid: c3ad31ccc59b04ac782aaabae2b9706b,
         type: 3}
