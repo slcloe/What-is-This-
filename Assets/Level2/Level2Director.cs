@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Level2Director : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class Level2Director : MonoBehaviour
 
     Button btSound;
     Button btSpeech;
-    Button btQuit;
     Image timer;
     Image learning_img;
     Text learning_word;
@@ -33,7 +31,6 @@ public class Level2Director : MonoBehaviour
         popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level2PopUpDirector>();
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         btSpeech = GameObject.Find("ButtonSpeech").GetComponent<Button>();
-        btQuit = GameObject.Find("ButtonQuit").GetComponent<Button>();
         timer = GameObject.Find("Timer").GetComponent<Image>();
         learning_word = GameObject.Find("TextWord").GetComponent<Text>();
         learning_img = GameObject.Find("learning_img").GetComponent<Image>();
@@ -64,7 +61,7 @@ public class Level2Director : MonoBehaviour
                 }
                 else
                 {
-                    popupDirector.ShowPopUp(result==word);
+                    popupDirector.ShowPopUp(result.Equals(word));
                 }
             }
         }
@@ -75,12 +72,6 @@ public class Level2Director : MonoBehaviour
     {
         btSound.onClick.AddListener(SpeakSound);
         btSpeech.onClick.AddListener(StartSpeech);
-        btQuit.onClick.AddListener(GoToHome);
-    }
-    
-    void GoToHome()
-    {
-        SceneManager.LoadScene("HomeScene");
     }
 
     void SpeakCommand()

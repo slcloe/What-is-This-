@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace TensorFlowLite
@@ -11,9 +12,8 @@ namespace TensorFlowLite
         int text_len = 0;
         string word;
         string[] strs = new string[3];
-        //List<letter> lst = new List<letter>();
-        //List<letter> lst2 = new List<letter>();
-        //List<letter> lst3 = new List<letter>();
+        int[] jung_rand = { 0, 2, 4, 5, 6, 8, 12, 13, 17, 18, 20 };
+        int[] jong_rand = { 0, 1, 4, 8, 16, 17, 21 };
         List<letter> lst = new List<letter>();
         List<letter> lst1 = new List<letter>();
         List<letter> lst2 = new List<letter>();
@@ -24,9 +24,6 @@ namespace TensorFlowLite
             set_string_idx(text);
             set_letter_simil(lst1);
             set_letter_simil(lst2);
-            //strs[0] = get_text(lst);
-            //strs[1] = get_text(lst1);
-            //strs[2] = get_text(lst2);
             set_words();
         }
 
@@ -77,9 +74,9 @@ namespace TensorFlowLite
                 if (jamo == 0)
                     idx = UnityEngine.Random.Range(0, 19);
                 else if (jamo == 1)
-                    idx = UnityEngine.Random.Range(0, 21);   
+                    idx = jung_rand[UnityEngine.Random.Range(0, jung_rand.Length)];   
                 else
-                    idx = UnityEngine.Random.Range(1, 28);
+                    idx = jong_rand[UnityEngine.Random.Range(0, jong_rand.Length)];
             } while (lst[order].idx[jamo] == idx);
             letters[order].idx[jamo] = idx;
         }
