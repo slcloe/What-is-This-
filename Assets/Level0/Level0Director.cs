@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Level0Director : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Level0Director : MonoBehaviour
     AudioSource audioSource;
 
     Button btSound;
+    Button btNext;
     Text textWord;
     Image learning_img;
 
@@ -18,6 +20,7 @@ public class Level0Director : MonoBehaviour
     {
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
+        btNext = GameObject.Find("ButtonNext").GetComponent<Button>();
         textWord = GameObject.Find("TextWord").GetComponent<Text>();
 		learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
@@ -39,6 +42,12 @@ public class Level0Director : MonoBehaviour
     void SetOnClickListener()
     {
         btSound.onClick.AddListener(SpeakSound);
+        btNext.onClick.AddListener(GoToLevel1);
+    }
+    
+    void GoToLevel1()
+    {
+        SceneManager.LoadScene("Level1Scene");
     }
 
     void SpeakSound()
