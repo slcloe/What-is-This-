@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Samples/SSD/SSD.unity
+    path: Assets/ObjectDetection/SSD/SSD.unity
     guid: 97a93d56ec0ff46078e253cebe3c63ee
   - enabled: 0
     path: 
@@ -20,7 +20,14 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Level2/Level2Scene.unity
     guid: 28e3194509f24e04a9ca8b8626ba73c9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Level1/Level1Scene.unity
     guid: 6647449e6a61f384aaf0c2e31a4167d4
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/AR/AR.unity
+    guid: 855a870ec73c4e149aed0441e0f245f3
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 5776e0f5b16da6e4a9c5cfa86cb2119f,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 090dcd00fd9e68f40b60fb5c7fe2ce86,
+      type: 2}
