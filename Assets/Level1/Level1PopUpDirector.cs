@@ -31,7 +31,7 @@ public class Level1PopUpDirector : MonoBehaviour
             successFailure.text = "¼º°ø!";
             ColorUtility.TryParseHtmlString("#039508", out color);
             successFailure.color = color;
-            btNextObject.GetComponent<Button>().onClick.AddListener(GotoLevel3);
+            btNextObject.GetComponent<Button>().onClick.AddListener(GotoLevel2);
         }
         else
         {
@@ -52,14 +52,12 @@ public class Level1PopUpDirector : MonoBehaviour
         btNextObject.GetComponent<Button>().onClick.AddListener(GotoObjectDetection);
     }
 
-    void GotoLevel3()
+    void GotoLevel2()
     {
-        //SceneManager.LoadScene("Level2Scene");
-        Debug.Log("load level2 scene");
+        SceneManager.LoadScene("Level2Scene");
     }
     void GotoObjectDetection()
     {
-        //SceneManager.LoadScene("SSD");
-        Debug.Log("load object detection");
+        SceneManager.LoadScene("SSD");
     }
 }
