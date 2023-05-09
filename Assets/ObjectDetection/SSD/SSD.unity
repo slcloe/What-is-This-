@@ -839,6 +839,7 @@ GameObject:
   - component: {fileID: 1278735549}
   - component: {fileID: 1278735552}
   - component: {fileID: 1278735551}
+  - component: {fileID: 1278735553}
   - component: {fileID: 1278735550}
   m_Layer: 5
   m_Name: Button
@@ -949,6 +950,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278735548}
   m_CullTransparentMesh: 1
+--- !u!114 &1278735553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278735548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4e0571857c9540a17e71e8a63c626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Assets/Level1/Level1Scene.unity
+  displayName: 
+  mode: 0
+  onDisplayNameChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &1328333883 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7719925103924872094, guid: c3ad31ccc59b04ac782aaabae2b9706b,
@@ -1356,7 +1375,7 @@ PrefabInstance:
     - target: {fileID: 7719925103924872090, guid: c3ad31ccc59b04ac782aaabae2b9706b,
         type: 3}
       propertyPath: sceneName
-      value: Assets/Home/Scenes/HomeScene.unity
+      value: Assets/Level1/Level1Scene.unity
       objectReference: {fileID: 0}
     - target: {fileID: 7719925103924872094, guid: c3ad31ccc59b04ac782aaabae2b9706b,
         type: 3}
