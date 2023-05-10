@@ -21,16 +21,6 @@ public class Item
 }
 
 [Serializable]
-public class Word
-{
-    public int idx;
-    public string word;
-    public int level;
-    public int successLevel;
-    public string date;
-}
-
-[Serializable]
 public class GetWordResponse
 {
     public List<Item> words;
@@ -39,6 +29,7 @@ public class GetWordResponse
 public static class UserInfo
 {
     private static int userIdx;
+    private static string parentPassword;
    
     public static void SetUserIdx(int idx)
     {
@@ -47,6 +38,14 @@ public static class UserInfo
     public static int GetUserIdx()
     {
         return userIdx;
+    }
+    public static void SetParentPassword(string p_password)
+    {
+        parentPassword = p_password;
+    }
+    public static string GetParentPassword()
+    {
+        return parentPassword;
     }
 
     public static List<Item> GetWords()

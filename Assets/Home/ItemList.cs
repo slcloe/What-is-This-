@@ -31,7 +31,8 @@ public class ItemList : MonoBehaviour
     {
 
         //1,2,3,4(상품),5(학습시작)
-        itemList = UserInfo.GetWords();
+        //itemList = UserInfo.GetWords();
+        itemList = new List<Item>();
         itemList.Add(new Item(0, 5));
 
     }

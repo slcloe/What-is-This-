@@ -7,6 +7,9 @@ public class HomeDirector : MonoBehaviour
 {
 
     ScrollRect scrollRect;
+    Button btParent;
+
+    HomePopUpDirector popupDirector;
 
     //0: vine, 1: stars, 2: ghosts, 3: clouds;
     GameObject[] objects = new GameObject[4];
@@ -19,6 +22,8 @@ public class HomeDirector : MonoBehaviour
     void Start()
     {
         scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();
+        btParent = GameObject.Find("ButtonParent").GetComponent<Button>();
+        popupDirector = GameObject.Find("PopUpDirector").GetComponent<HomePopUpDirector>();
 
         objects[0] = GameObject.Find("Vine1");
         objects[1] = GameObject.Find("Stars1");
@@ -35,9 +40,13 @@ public class HomeDirector : MonoBehaviour
         curPos[3] = 0;
 
         ratio = startPos[0].x * (-1);
-        //Screen.orientation = ScreenOrientation.LandscapeRight;
-    }
 
+        btParent.onClick.AddListener(ShowPopUp);
+    }
+    void ShowPopUp()
+    {
+        popupDirector.ShowPopUp();
+    }
 
     void Update()
     {
