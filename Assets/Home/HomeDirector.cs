@@ -18,7 +18,8 @@ public class HomeDirector : MonoBehaviour
 
     void Start()
     {
-        scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();
+		//Screen.orientation = ScreenOrientation.LandscapeLeft;
+		scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();
 
         objects[0] = GameObject.Find("Vine1");
         objects[1] = GameObject.Find("Stars1");

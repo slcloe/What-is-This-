@@ -51,8 +51,10 @@ namespace TensorFlowLite
                 ssd = new SSD(options);
             }
 
-            // Init frames
-            frames = new Text[10];
+			//Screen.orientation = ScreenOrientation.LandscapeLeft;
+
+			// Init frames
+			frames = new Text[10];
             Transform parent = frameContainer.transform;
             for (int i = 0; i < frames.Length; i++)
             {
@@ -64,6 +66,7 @@ namespace TensorFlowLite
             labels = labelMap.text.Split('\n');
 
             GetComponent<WebCamInput>().OnTextureUpdate.AddListener(Invoke);
+
         }
 
         private void OnDestroy()
