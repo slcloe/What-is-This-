@@ -29,9 +29,21 @@ public class GetWordResponse
 public static class UserInfo
 {
     private static int userIdx;
+    private static string userId;
     private static string parentPassword;
-   
-    public static void SetUserIdx(int idx)
+	private static double successRate3;
+	private static double successRate2;
+	private static double successRate1;
+	private static int level_avg;
+	private static int cnt_word;
+
+    public static void SetUserId(string id)
+    {
+        userId = id;
+    }
+    public static string GetUserId() { return userId; }
+
+	public static void SetUserIdx(int idx)
     {
         userIdx = idx;
     }
@@ -71,4 +83,45 @@ public static class UserInfo
             return null;
         }
     }
+
+	public static void SetSuccessRate1(double rate)
+	{
+		successRate1 = rate;
+	}
+	public static double GetSuccessRate1()
+	{
+		return successRate1;
+	}
+	public static void SetSuccessRate2(double rate)
+	{
+		successRate2 = rate;
+	}
+	public static double GetSuccessRate2()
+	{
+		return successRate2;
+	}
+	public static void SetSuccessRate3(double rate)
+	{
+		successRate3 = rate;
+	}
+	public static double GetSuccessRate3()
+	{
+		return successRate3;
+	}
+	public static void SetLevelAvg(int level)
+	{
+		level_avg = level;
+	}
+	public static int GetLevelAvg()
+	{
+		return level_avg;
+	}
+	public static void SetcntWord(int cnt)
+	{
+		cnt_word = cnt;
+	}
+	public static int GetcntWord()
+	{
+		return cnt_word;
+	}
 }

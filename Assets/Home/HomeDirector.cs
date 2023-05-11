@@ -21,7 +21,7 @@ public class HomeDirector : MonoBehaviour
 
     void Start()
     {
-        scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();
+		scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();
         btParent = GameObject.Find("ButtonParent").GetComponent<Button>();
         popupDirector = GameObject.Find("PopUpDirector").GetComponent<HomePopUpDirector>();
 
