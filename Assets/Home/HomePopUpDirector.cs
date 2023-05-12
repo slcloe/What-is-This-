@@ -94,7 +94,6 @@ public class HomePopUpDirector : MonoBehaviour
 
         try
         {
-            Debug.Log("try catch ¹®");
             using(var stream = request.GetRequestStream())
             {
                 stream.Write(bytes, 0, bytes.Length);
@@ -102,11 +101,8 @@ public class HomePopUpDirector : MonoBehaviour
                 stream.Close();
             }
 
-			Debug.Log(1);
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			Debug.Log(2);
 			StreamReader reader = new StreamReader(response.GetResponseStream());
-			Debug.Log(3);
 
 			string json = reader.ReadToEnd();
 
