@@ -33,18 +33,28 @@ public class analysis_result
 public class ParentDirector : MonoBehaviour
 {
 	string[] days = new string[9];
-	public List<float> successRate1 = new List<float>();
-	public List<float> successRate2 = new List<float>();
-	public List<float> successRate3 = new List<float>();
+	public static List<float> successRate1 = new List<float>();
+	public static List<float> successRate2 = new List<float>();
+	public static List<float> successRate3 = new List<float>();
+	public static List<analysis_result> results = new List<analysis_result>();
 
 	// Start is called before the first frame update
 	void Start()
     {
 		//Screen.orientation = ScreenOrientation.Portrait;
 		SetDays();
-		for(int i=0;i<8;i++)
+		if (results.Count > 0) { results.Clear(); }
+		if (successRate1.Count > 0) { successRate1.Clear(); }
+		if (successRate2.Count > 0) { successRate2.Clear(); }
+		if (successRate3.Count > 0) { successRate3.Clear(); }
+		for(int i=7;i>=0;i--)
 		{
 			RequestAnalysisInfo(days[i], days[i+1]);
+		}
+
+		foreach(analysis_result result in results)
+		{
+			Debug.Log(result.successRate1);
 		}
 
 	}
@@ -88,6 +98,10 @@ public class ParentDirector : MonoBehaviour
 			string json = reader.ReadToEnd();
 
 			analysis_result result = JsonUtility.FromJson<analysis_result>(json);
+			results.Add(result);
+			successRate1.Add(result.successRate1);
+			successRate2.Add(result.successRate2);
+			successRate3.Add(result.successRate3);
 			Debug.Log(result.idx);
 		}
 		catch (WebException e)

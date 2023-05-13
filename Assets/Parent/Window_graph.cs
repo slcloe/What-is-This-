@@ -21,6 +21,7 @@ public class Window_graph : MonoBehaviour
 		List<float> valueList1 = new List<float>() { 10, 20, 30, 40, 50, 60, 70, 80 };
 		ShowGraph(valueList);
 		ShowGraph(valueList1);
+		ShowGraph(ParentDirector.successRate1);
 	}
 
 	private GameObject CreateCircle(Vector2 anchoredPosition)
@@ -40,7 +41,7 @@ public class Window_graph : MonoBehaviour
 	{
 		float graphHeight = graphContainer.sizeDelta.y;
 		float yMaximum = 100f;
-		float xSize = 70f;
+		float xSize = 90f;
 
 		GameObject lastCircleGameObject = null;
 		for (int i = 0; i < valueList.Count; i++)
@@ -59,7 +60,7 @@ public class Window_graph : MonoBehaviour
 			labelX.SetParent(graphContainer);
 			labelX.gameObject.SetActive(true);
 			labelX.anchoredPosition = new Vector2(xPosition, -20f);
-			labelX.GetComponent<Text>().text=i.ToString();
+			labelX.GetComponent<Text>().text=(i + 1).ToString() + "ÁÖÂ÷";
 		}
 		int separatorCount = 10;
 		for (int i = 0; i <= separatorCount; i++)
