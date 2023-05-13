@@ -10,8 +10,9 @@ public class Window_graph : MonoBehaviour
 	private RectTransform labelTemplateX;
 	private RectTransform labelTemplateY;
 
-	private void Awake()
+	private void Start()
 	{
+		Debug.Log("graphdirector");
 		graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
 		labelTemplateX = graphContainer.Find("labelTemplateX").GetComponent<RectTransform>();
 		labelTemplateY = graphContainer.Find("labelTemplateY").GetComponent<RectTransform>();
