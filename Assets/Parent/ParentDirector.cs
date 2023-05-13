@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 using System.Runtime.CompilerServices;
 using UnityEngine.Animations;
 using System.Reflection;
+using UnityEditor;
 
 [Serializable]
 public class analysis_info
@@ -31,23 +32,45 @@ public class analysis_result
 
 public class ParentDirector : MonoBehaviour
 {
-    
-	//static private string apiUrl = "http://121.160.119.135:8081/getAnalysis/date/between?member_idx=1&older_date=2023-05-02T00:00:00&newer_date=2023-05-03T00:00:00";
+	string[] days = new string[9];
+	public List<float> successRate1 = new List<float>();
+	public List<float> successRate2 = new List<float>();
+	public List<float> successRate3 = new List<float>();
 
 	// Start is called before the first frame update
 	void Start()
     {
-		//Screen.orientation = ScreenOrientation.Portrait;   
-		RequestAnalysisInfo();
+		//Screen.orientation = ScreenOrientation.Portrait;
+		SetDays();
+		for(int i=0;i<8;i++)
+		{
+			RequestAnalysisInfo(days[i], days[i+1]);
+		}
+
 	}
 
-	void RequestAnalysisInfo()
+	void SetDays()
+	{
+		string time = "T00:00:00";
+		days[0] = DateTime.Now.ToString("yyyy/MM/dd") + time;
+		for (int i=0;i<8;i++)
+		{
+			days[i + 1] = DateTime.Now.AddDays(-7 * (i+1)).ToString("yyyy/MM/dd") + time;
+		}
+
+		for (int i=0;i<9;i++)
+		{
+			Debug.Log(days[i]);
+		}
+	}
+
+	void RequestAnalysisInfo(string older, string newer)
 	{
 		analysis_info info = new analysis_info();
 		//info.member_idx = UserInfo.GetUserIdx();
 		info.member_idx = 1;
-		info.older_date = "2023-05-02T00:00:00";
-		info.newer_date = "2023-05-03T00:00:00";
+		info.older_date = older;
+		info.newer_date = newer;
 		string apiUrl = "http://121.160.119.135:8081/getAnalysis/date/between?member_idx=" + info.member_idx.ToString() + "&older_date="+info.older_date+"&newer_date="+info.newer_date;
 
 
