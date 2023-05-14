@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class ColorSet
+{
+	public int r, g, b;
+	public float a;
+	public ColorSet(int r, int g, int b, float a)
+	{
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.a = a;
+	}
+}
+
 public class Window_graph : MonoBehaviour
 {
 	[SerializeField] private Sprite circleSprite;
@@ -19,9 +32,13 @@ public class Window_graph : MonoBehaviour
 
 		List<float> valueList = new List<float>() { 5, 100, 56, 45, 30, 22, 33, 100 };
 		List<float> valueList1 = new List<float>() { 10, 20, 30, 40, 50, 60, 70, 80 };
-		ShowGraph(valueList);
-		ShowGraph(valueList1);
-		ShowGraph(ParentDirector.successRate1);
+
+		ColorSet color1 = new ColorSet(0,1,0,1);
+		ColorSet color2 = new ColorSet(1,0,0,1);
+
+		ShowGraph(valueList,color1);
+		ShowGraph(valueList1,color2);
+		ShowGraph(ParentDirector.successRate1, color1);
 	}
 
 	private GameObject CreateCircle(Vector2 anchoredPosition)
@@ -37,7 +54,7 @@ public class Window_graph : MonoBehaviour
 		return gameObject;
 	}
 
-	private void ShowGraph(List<float> valueList)
+	private void ShowGraph(List<float> valueList, ColorSet color)
 	{
 		float graphHeight = graphContainer.sizeDelta.y;
 		float yMaximum = 100f;
@@ -51,7 +68,7 @@ public class Window_graph : MonoBehaviour
 			GameObject circleGameObject = CreateCircle(new Vector2(xPosition, yPosition));
 			if (lastCircleGameObject != null)
 			{
-				CreateDotConnection(lastCircleGameObject.GetComponent<RectTransform>().anchoredPosition, circleGameObject.GetComponent<RectTransform>().anchoredPosition);
+				CreateDotConnection(lastCircleGameObject.GetComponent<RectTransform>().anchoredPosition, circleGameObject.GetComponent<RectTransform>().anchoredPosition, color);
 
 			}
 			lastCircleGameObject = circleGameObject;
@@ -74,11 +91,11 @@ public class Window_graph : MonoBehaviour
 		}
 	}
 
-	private void CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB)
+	private void CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB, ColorSet color)
 	{
 		GameObject gameObject = new GameObject("dotConnection", typeof(Image));
 		gameObject.transform.SetParent(graphContainer, false);
-		gameObject.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
+		gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, color.a);
 		RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 		Vector2 dir = (dotPositionB - dotPositionA).normalized;
 		float distance = Vector2.Distance(dotPositionA, dotPositionB);

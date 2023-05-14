@@ -12,9 +12,10 @@ namespace TensorFlowLite
         int text_len = 0;
         string word;
         string[] strs = new string[3];
-        int[] jung_rand = { 0, 2, 4, 5, 6, 8, 12, 13, 17, 18, 20 };
-        int[] jong_rand = { 0, 1, 4, 8, 16, 17, 21 };
-        List<letter> lst = new List<letter>();
+		int[] cho_rand = { 4, 6, 7, 8, 10, 13, 16, 17, 18 };
+		int[] jung_rand = { 0, 4, 8, 13, 20 };
+		int[] jong_rand = { 0, 1, 4, 8, 16 };
+		List<letter> lst = new List<letter>();
         List<letter> lst1 = new List<letter>();
         List<letter> lst2 = new List<letter>();
 
@@ -72,9 +73,13 @@ namespace TensorFlowLite
             do
             {
                 if (jamo == 0)
+                {
+                    //idx = cho_rand[UnityEngine.Random.Range(0, cho_rand.Length)];
                     idx = UnityEngine.Random.Range(0, 19);
+
+				}
                 else if (jamo == 1)
-                    idx = jung_rand[UnityEngine.Random.Range(0, jung_rand.Length)];   
+                    idx = jung_rand[UnityEngine.Random.Range(0, jung_rand.Length)];
                 else
                     idx = jong_rand[UnityEngine.Random.Range(0, jong_rand.Length)];
             } while (lst[order].idx[jamo] == idx);
