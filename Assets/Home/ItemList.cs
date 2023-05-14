@@ -31,8 +31,7 @@ public class ItemList : MonoBehaviour
     {
 
         //1,2,3,4(상품),5(학습시작)
-        //itemList = UserInfo.GetWords();
-        itemList = new List<Item>();
+        itemList = UserInfo.GetWords();
         itemList.Add(new Item(0, 5));
 
     }
@@ -50,13 +49,20 @@ public class ItemList : MonoBehaviour
         foreach (Item item in itemList)
         {
             g = Instantiate(itemTemplate, transform);
-            Sprite pumpkin = allPumpkins[item.successLevel - 1].pumpkin;
+
+            int pumpkinIdx = item.successLevel - 1;
+            if (pumpkinIdx == -1) pumpkinIdx = 0;
+            Sprite pumpkin = allPumpkins[pumpkinIdx].pumpkin;
 
             g.transform.GetChild(0).GetComponent<Image>().sprite = pumpkin;
 
             g.transform.GetChild(1).GetComponent<Text>().text = item.word;
 
-            if(item.idx == 0) g.GetComponent<Button>().AddEventListener(GotoLearning);
+            int fontSize = 200;
+            if (item.successLevel != 5 && item.word.Length > 3) fontSize -= (item.word.Length - 3) * 40;
+            g.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
+
+            if (item.idx == 0) g.GetComponent<Button>().AddEventListener(GotoLearning);
         }
 
         Destroy(itemTemplate);

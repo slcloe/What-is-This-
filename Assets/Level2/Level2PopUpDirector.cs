@@ -31,16 +31,26 @@ public class Level2PopUpDirector : MonoBehaviour
             successFailure.text = "성공!";
             ColorUtility.TryParseHtmlString("#039508", out color);
             successFailure.color = color;
-            btNextObject.GetComponent<Button>().onClick.AddListener(GotoLevel3);
+            if (UserInfo.GetUserLevel() == 2)
+            {
+                UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 2);
+                btNextObject.GetComponent<Button>().onClick.AddListener(GotoObjectDetection);
+                textDirectionObject.GetComponent<Text>().text = "처음으로";
+            }
+            else
+            {
+                btNextObject.GetComponent<Button>().onClick.AddListener(GotoLevel3);
+            }
         }
         else
         {
+            UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 1);
             successFailure.text = "실패!";
             ColorUtility.TryParseHtmlString("#E00010", out color);
             successFailure.color = color;
             textDirectionObject.SetActive(false);
             btNextObject.SetActive(false);
-            Invoke("SwitchToFailure", 1);
+            Invoke("SwitchToFailure", 2);
         }
     }
 
@@ -58,8 +68,7 @@ public class Level2PopUpDirector : MonoBehaviour
         Debug.Log("load level3 scene");
     }
     void GotoObjectDetection()
-    {
-        //SceneManager.LoadScene("SSD");
-        Debug.Log("load object detection");
+    { 
+        SceneManager.LoadScene("SSD");
     }
 }
