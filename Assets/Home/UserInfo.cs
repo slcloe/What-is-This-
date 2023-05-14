@@ -26,10 +26,28 @@ public class GetWordResponse
     public List<Item> words;
 }
 
+[Serializable]
+public class StudyWord
+{
+    public string word;
+    public int level;
+    public int successLevel;
+    public string date;
+    public StudyWord(string word, int level, int successLevel, string date)
+    {
+        this.word = word;
+        this.level = level;
+        this.successLevel = successLevel;
+        this.date = date;
+    }
+}
+
+
 public static class UserInfo
 {
     private static int userIdx;
     private static string parentPassword;
+    private static int userLevel;
    
     public static void SetUserIdx(int idx)
     {
@@ -47,6 +65,15 @@ public static class UserInfo
     {
         return parentPassword;
     }
+    public static void SetUserLevel(int level)
+    {
+        userLevel = level;
+    }
+    public static int GetUserLevel()
+    {
+        return userLevel;
+    }
+
 
     public static List<Item> GetWords()
     {
@@ -70,5 +97,61 @@ public static class UserInfo
             Debug.Log(e);
             return null;
         }
+    }
+    public static void GetLevel()
+    {
+        string apiUrl = "http://121.160.119.135:8081/getLevel?member_idx=" + userIdx;
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+        request.Method = "GET";
+
+        try
+        {
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            
+            userLevel = Convert.ToInt32(reader.ReadToEnd());
+        }
+        catch (WebException e)
+        {
+            Debug.Log(e);
+        }
+    }
+    public static void StudyWord(string word, int successLevel)
+    {
+
+        string apiUrl = "http://121.160.119.135:8081/studyWord?member_idx=" + userIdx;
+
+        string date = "2023-05-03T17:49:12";
+        StudyWord item = new StudyWord(word, userLevel, successLevel, date);
+        string str = JsonUtility.ToJson(item);
+
+
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(str);
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.ContentLength = bytes.Length;
+
+        try
+        {
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(bytes, 0, bytes.Length);
+                stream.Flush();
+                stream.Close();
+            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+
+        }
+        catch (WebException e)
+        {
+            Debug.Log(e);
+        }
+
+        GetLevel(); 
     }
 }
