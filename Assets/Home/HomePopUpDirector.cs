@@ -48,8 +48,7 @@ public class HomePopUpDirector : MonoBehaviour
         btNext = GameObject.Find("ButtonNext").GetComponent<Button>();
         popup = GameObject.Find("PopUpWindow");
         passwordInput = GameObject.Find("PasswordInputField").GetComponent<InputField>();
-
-        popup.SetActive(false);
+		popup.SetActive(false);
     }
 
     public void ShowPopUp()
