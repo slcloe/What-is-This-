@@ -68,10 +68,10 @@ public class ParentDirector : MonoBehaviour
 			days[i + 1] = DateTime.Now.AddDays(-7 * (i+1)).ToString("yyyy/MM/dd") + time;
 		}
 
-		for (int i=0;i<9;i++)
-		{
-			Debug.Log(days[i]);
-		}
+		//for (int i=0;i<9;i++)
+		//{
+		//	Debug.Log(days[i]);
+		//}
 	}
 
 	void RequestAnalysisInfo(string older, string newer)
@@ -89,12 +89,12 @@ public class ParentDirector : MonoBehaviour
 
 		HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
 		request.Method = "GET";
-		Debug.Log("get start");
+		//Debug.Log("get start");
 		try
 		{
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			StreamReader reader = new StreamReader(response.GetResponseStream());
-			Debug.Log("read");
+			//Debug.Log("read");
 			string json = reader.ReadToEnd();
 
 			analysis_result result = JsonUtility.FromJson<analysis_result>(json);
@@ -102,7 +102,7 @@ public class ParentDirector : MonoBehaviour
 			successRate1.Add(result.successRate1);
 			successRate2.Add(result.successRate2);
 			successRate3.Add(result.successRate3);
-			Debug.Log(result.idx);
+			//Debug.Log(result.idx);
 		}
 		catch (WebException e)
 		{
