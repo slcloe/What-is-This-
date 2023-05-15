@@ -90,6 +90,7 @@ public class LoginDirector : MonoBehaviour
                 LoginResponse data = JsonUtility.FromJson<LoginResponse>(json);
                 UserInfo.SetUserIdx(data.idx);
                 UserInfo.SetUserId(data.userId);
+                UserInfo.GetLevel();
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TensorFlowLite;
 
 public class Level1PopUpDirector : MonoBehaviour
 {
@@ -31,16 +32,26 @@ public class Level1PopUpDirector : MonoBehaviour
             successFailure.text = "성공!";
             ColorUtility.TryParseHtmlString("#039508", out color);
             successFailure.color = color;
-            btNextObject.GetComponent<Button>().onClick.AddListener(GotoLevel2);
+            if (UserInfo.GetUserLevel() == 1)
+            {
+                UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 1);
+                btNextObject.GetComponent<Button>().onClick.AddListener(GotoObjectDetection);
+                textDirectionObject.GetComponent<Text>().text = "처음으로";
+            }
+            else
+            {
+                btNextObject.GetComponent<Button>().onClick.AddListener(GotoLevel2);
+            }
         }
         else
         {
+            UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 0);
             successFailure.text = "실패!";
             ColorUtility.TryParseHtmlString("#E00010", out color);
             successFailure.color = color;
             textDirectionObject.SetActive(false);
             btNextObject.SetActive(false);
-            Invoke("SwitchToFailure", 1);
+            Invoke("SwitchToFailure", 2);
         }
     }
 
