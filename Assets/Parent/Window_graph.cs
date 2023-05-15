@@ -36,9 +36,10 @@ public class Window_graph : MonoBehaviour
 		ColorSet color1 = new ColorSet(0,1,0,1);
 		ColorSet color2 = new ColorSet(1,0,0,1);
 
-		ShowGraph(valueList,color1);
-		ShowGraph(valueList1,color2);
-		ShowGraph(ParentDirector.successRate1, color1);
+		ShowGraph(ParentDirector.successRate1, new ColorSet(0, 1, 0, 1));
+		ShowGraph(ParentDirector.successRate2,new ColorSet(0,0, 1, 1));
+		ShowGraph(ParentDirector.successRate3,new ColorSet(1, 0, 0, 1));
+
 	}
 
 	private GameObject CreateCircle(Vector2 anchoredPosition)
