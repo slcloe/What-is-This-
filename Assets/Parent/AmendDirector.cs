@@ -30,6 +30,10 @@ public class AmendGetInfo
 	public string amends;
 	public int goal;
 	public int remain;
+	public AmendGetInfo()
+	{
+		
+	}
 	public AmendGetInfo(long idx, string amends, int goal, int remain) 
 	{
 		this.idx = idx;
@@ -48,29 +52,38 @@ public class AmendGetInfo
 
 public class AmendDirector : MonoBehaviour
 {
-	AmendGetInfo aminfo;
-	InputField inputprize;
-	Text placeholder;
-	Text prize_name;
-	List<string> cntList = new List<string>();
+	public static AmendGetInfo aminfo = new AmendGetInfo();
+	InputField inputPrize;
+	InputField inputPeriod;
+	Button btSendInfo;
 	// Start is called before the first frame update
 	void Start()
     {
-        inputprize = GameObject.Find("inputPrize").GetComponent<InputField>();
-
-		aminfo = GetAmendInfo();
+		inputPrize = GameObject.Find("inputPrize").GetComponent<InputField>();
+		inputPeriod = GameObject.Find("inputPeriod").GetComponent<InputField>();
+		btSendInfo = GameObject.Find("ButtonSend").GetComponent<Button>();
+		GetAmendInfo();
 		if (aminfo.amends == null)
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품을 입력해주세요.";
 		else
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.amends;
 
-		if (aminfo.remain == 0)
+		if (aminfo.goal == 0)
 			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품수여주기를 입력해주세요.";
 		else
-			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.remain.ToString();
+			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.remain.ToString() + "개";
+
+		btSendInfo.onClick.AddListener(SendAmendInfo);
+	}
+	
+	void CheckValidation()
+	{
+		if (inputPrize != null || aminfo.amends != null) { return; }
+		if (inputPeriod != null || aminfo.goal != 0) { return; }
+		SendAmendInfo();
 	}
 
-	AmendGetInfo GetAmendInfo()
+	void GetAmendInfo()
 	{
 		AmendUser info = new AmendUser();
 		info.member_idx = UserInfo.GetUserIdx();
@@ -91,11 +104,13 @@ public class AmendDirector : MonoBehaviour
 			string json = reader.ReadToEnd();
 
 			AmendInfo result = JsonUtility.FromJson<AmendInfo>(json);
-			return new AmendGetInfo(result);
+			aminfo.amends = result.amends;
+			aminfo.idx = result.idx;
+			aminfo.goal = result.goal;
+			aminfo.remain = result.remain;
 		}
 		catch (WebException e)
 		{
-			return new AmendGetInfo(0, "0", 0, 0);
 		}
 	}
 
@@ -103,9 +118,11 @@ public class AmendDirector : MonoBehaviour
 	{
 		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/amends/update";
 
-		AmendUser info = new AmendUser();
-		info.member_idx = UserInfo.GetUserIdx();
-
+		AmendInfo info = new AmendInfo();
+		info.idx = aminfo.idx;
+		info.amends = inputPrize.text;
+		info.goal = Convert.ToInt32(inputPeriod.text);
+		info.remain = info.goal;
 
 		string str = JsonUtility.ToJson(info);
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(str);
@@ -130,10 +147,7 @@ public class AmendDirector : MonoBehaviour
 
 			if (response.StatusCode == HttpStatusCode.OK)
 			{
-				LoginResponse data = JsonUtility.FromJson<LoginResponse>(json);
-				UserInfo.SetUserIdx(data.idx);
-				UserInfo.SetUserId(data.userId);
-				UserInfo.GetLevel();
+				AmendInfo data = JsonUtility.FromJson<AmendInfo>(json);
 			}
 			else
 			{
