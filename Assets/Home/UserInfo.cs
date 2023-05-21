@@ -42,6 +42,13 @@ public class StudyWord
     }
 }
 
+public class Amends
+{
+    public int idx;
+    public string amends;
+    public int goal;
+    public int remain;
+}
 
 public static class UserInfo
 {
@@ -54,6 +61,9 @@ public static class UserInfo
 	private static double successRate1;
 	private static int level_avg;
 	private static int cnt_word;
+
+    private static Amends amends = null;
+    
 
     public static void SetUserId(string id)
     {
@@ -87,10 +97,24 @@ public static class UserInfo
         return userLevel;
     }
 
+    public static Amends GetAmends()
+    {
+        return amends;
+    }
+    public static void SetAmends(Amends _amends)
+    {
+        amends = _amends;
+    }
+    public static bool IsAmendsTime()
+    {
+        Debug.Log(amends.amends);
+        if (amends != null && amends.amends != "" && amends.remain == 0) return true;
+        else return false;
+    }
 
     public static List<Item> GetWords()
     {
-        string apiUrl = "http://121.160.119.135:8081/getWords?member_idx=" + userIdx;
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getWords?member_idx=" + userIdx;
 
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
         request.Method = "GET";
@@ -153,7 +177,7 @@ public static class UserInfo
 	}
     public static void GetLevel()
     {
-        string apiUrl = "http://121.160.119.135:8081/getLevel?member_idx=" + userIdx;
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getLevel?member_idx=" + userIdx;
 
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
         request.Method = "GET";
@@ -173,7 +197,7 @@ public static class UserInfo
     public static void StudyWord(string word, int successLevel)
     {
 
-        string apiUrl = "http://121.160.119.135:8081/studyWord?member_idx=" + userIdx;
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/studyWord?member_idx=" + userIdx;
 
         string date = "2023-05-03T17:49:12";
         StudyWord item = new StudyWord(word, userLevel, successLevel, date);
@@ -198,7 +222,8 @@ public static class UserInfo
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
 
-
+            Amends amends = JsonUtility.FromJson<Amends>(reader.ReadToEnd());
+            SetAmends(amends);
         }
         catch (WebException e)
         {
@@ -206,5 +231,51 @@ public static class UserInfo
         }
 
         GetLevel(); 
+    }
+
+    public static void GetAmendsRequest()
+    {
+
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getAmends?member_idx=" + userIdx;
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+        request.Method = "GET";
+
+        try
+        {
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            Amends amends = JsonUtility.FromJson<Amends>(reader.ReadToEnd());
+            SetAmends(amends);
+        }
+        catch (WebException e)
+        {
+            Debug.Log(e);
+        }
+    }
+    public static void ResetAmendsRequest()
+    {
+
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/amends/reset?member_idx=" + userIdx;
+
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+        request.Method = "POST";
+
+        try
+        {
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            Debug.Log(reader.ReadToEnd());
+            SetAmends(null);
+        }
+        catch (WebException e)
+        {
+            Debug.Log(e);
+        }
+
+        GetLevel();
     }
 }
