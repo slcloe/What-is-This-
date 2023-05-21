@@ -90,7 +90,7 @@ public static class UserInfo
 
     public static List<Item> GetWords()
     {
-        string apiUrl = "http://121.160.119.135:8081/getWords?member_idx=" + userIdx;
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getWords?member_idx=" + userIdx;
 
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
         request.Method = "GET";
@@ -153,7 +153,7 @@ public static class UserInfo
 	}
     public static void GetLevel()
     {
-        string apiUrl = "http://121.160.119.135:8081/getLevel?member_idx=" + userIdx;
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getLevel?member_idx=" + userIdx;
 
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
         request.Method = "GET";
@@ -173,7 +173,7 @@ public static class UserInfo
     public static void StudyWord(string word, int successLevel)
     {
 
-        string apiUrl = "http://121.160.119.135:8081/studyWord?member_idx=" + userIdx;
+        string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/studyWord?member_idx=" + userIdx;
 
 
 		string time = DateTime.Now.ToString("HH:mm:ss");
