@@ -90,6 +90,7 @@ public class LoginDirector : MonoBehaviour
                 UserInfo.SetUserIdx(data.idx);
                 UserInfo.SetUserId(data.userId);
                 UserInfo.GetLevel();
+                UserInfo.GetAmendsRequest();
             }
             else
             {

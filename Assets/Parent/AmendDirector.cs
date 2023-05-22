@@ -63,7 +63,7 @@ public class AmendDirector : MonoBehaviour
 		inputPeriod = GameObject.Find("inputPeriod").GetComponent<InputField>();
 		btSendInfo = GameObject.Find("ButtonSend").GetComponent<Button>();
 		GetAmendInfo();
-		if (aminfo.amends == null)
+		if (aminfo.amends == "" || aminfo.amends.Equals("null"))
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품을 입력해주세요.";
 		else
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.amends;

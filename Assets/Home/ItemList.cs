@@ -32,6 +32,7 @@ public class ItemList : MonoBehaviour
 
         //1,2,3,4(상품),5(학습시작)
         itemList = UserInfo.GetWords();
+        if (UserInfo.IsAmendsTime()) itemList.Add(new Item(0, 4));
         itemList.Add(new Item(0, 5));
 
     }
@@ -59,10 +60,11 @@ public class ItemList : MonoBehaviour
             g.transform.GetChild(1).GetComponent<Text>().text = item.word;
 
             int fontSize = 200;
-            if (item.successLevel != 5 && item.word.Length > 3) fontSize -= (item.word.Length - 3) * 40;
+            if (item.successLevel != 4 && item.successLevel != 5 && item.word.Length > 3) fontSize -= (item.word.Length - 3) * 40;
             g.transform.GetChild(1).GetComponent<Text>().fontSize = fontSize;
 
-            if (item.idx == 0) g.GetComponent<Button>().AddEventListener(GotoLearning);
+            if (item.successLevel == 4) g.GetComponent<Button>().AddEventListener(GetAmends);
+            if (item.successLevel == 5) g.GetComponent<Button>().AddEventListener(GotoLearning);
         }
 
         Destroy(itemTemplate);
@@ -72,6 +74,10 @@ public class ItemList : MonoBehaviour
     void GotoLearning()
     {
         SceneManager.LoadScene("SSD");
+    }
+    void GetAmends()
+    {
+        SceneManager.LoadScene("AmendsScene");
     }
 
 }
