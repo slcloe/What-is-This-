@@ -1953,7 +1953,7 @@ GameObject:
   - component: {fileID: 996208866}
   - component: {fileID: 996208867}
   m_Layer: 5
-  m_Name: current_state
+  m_Name: CurrentState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2752,6 +2752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389795841}
   - component: {fileID: 1389795842}
+  - component: {fileID: 1389795843}
   m_Layer: 5
   m_Name: radio_kor
   m_TagString: Untagged
@@ -2826,8 +2827,32 @@ MonoBehaviour:
   m_Group: {fileID: 1991978048}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 0
+      m_Calls:
+      - m_Target: {fileID: 1389795843}
+        m_TargetAssemblyTypeName: SetLanguage, Assembly-CSharp
+        m_MethodName: SetKor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 1
+--- !u!114 &1389795843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389795840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2193bde00552774fa137d3ae9c9d67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1448727258
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,7 +3210,7 @@ GameObject:
   - component: {fileID: 1548241248}
   - component: {fileID: 1548241249}
   m_Layer: 5
-  m_Name: prize
+  m_Name: Prize
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4052,6 +4077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1748102927}
   - component: {fileID: 1748102928}
+  - component: {fileID: 1748102929}
   m_Layer: 5
   m_Name: radio_eng
   m_TagString: Untagged
@@ -4126,8 +4152,32 @@ MonoBehaviour:
   m_Group: {fileID: 1991978048}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 1748102929}
+        m_TargetAssemblyTypeName: SetLanguage, Assembly-CSharp
+        m_MethodName: SetEng
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
+--- !u!114 &1748102929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748102926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2193bde00552774fa137d3ae9c9d67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1846485627
 GameObject:
   m_ObjectHideFlags: 0
@@ -4307,8 +4357,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1991978047}
   - component: {fileID: 1991978048}
+  - component: {fileID: 1991978049}
   m_Layer: 5
-  m_Name: set_language
+  m_Name: SetLanguage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4350,6 +4401,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &1991978049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991978046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2193bde00552774fa137d3ae9c9d67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1999445724
 GameObject:
   m_ObjectHideFlags: 0
@@ -4360,7 +4423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1999445725}
   m_Layer: 5
-  m_Name: graph_success
+  m_Name: GraphSuccess
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
