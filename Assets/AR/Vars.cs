@@ -5,6 +5,7 @@ using UnityEngine;
 public class Vars : MonoBehaviour
 {
     public static int test1=0;
+    public static int TotalWords = 20;
     // Start is called before the first frame update
     void Start()
     {

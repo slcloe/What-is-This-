@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "R3CN80ZESGE",
+    "m_SelectedDeviceId": "R3CR60QFNKZ",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "R3CR60QFNKZ",
+        "name": "com.asus4.whatisthis",
+        "processId": 8342,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -18,6 +18,96 @@
             "deviceId": "R3CN80ZESGE",
             "name": "com.asus4.tfliteunitysample",
             "processId": 29036,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.kakao.talk",
+            "processId": 21944,
+            "exited": true
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.instagram.android",
+            "processId": 9757,
+            "exited": true
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 10937,
+            "exited": true
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 12421,
+            "exited": true
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 16410,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 17930,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 20420,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 21039,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 25939,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 28572,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 29684,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 32628,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 31930,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 5129,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CR60QFNKZ",
+            "name": "com.asus4.whatisthis",
+            "processId": 8342,
             "exited": false
         }
     ],

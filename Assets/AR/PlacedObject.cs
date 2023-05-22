@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlacedObject : MonoBehaviour
 {
     [SerializeField]
+    private GameObject Cube;
     private GameObject CubeSelected;
     // Start is called before the first frame update
 
@@ -20,19 +21,20 @@ public class PlacedObject : MonoBehaviour
         get => selectedObject;
         set
         {
-            if(selectedObject==value ) return;
+            if (selectedObject==value ) return;
 
             if (selectedObject != null) 
             {
-                selectedObject.CubeSelected.SetActive(false); 
+                selectedObject.CubeSelected.SetActive(false);
             }
 
              selectedObject = value;
-
-             if (value != null)
+            if (value != null)
                 {
+                    value.Cube.SetActive(false);
+                Destroy(value.Cube);
                     value.CubeSelected.SetActive(true);
-                }
+            }
         }
     }
 
