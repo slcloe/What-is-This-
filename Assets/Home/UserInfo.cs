@@ -107,7 +107,6 @@ public static class UserInfo
     }
     public static bool IsAmendsTime()
     {
-        Debug.Log(amends.amends);
         if (amends != null && amends.amends != "" && amends.remain == 0) return true;
         else return false;
     }
@@ -199,8 +198,13 @@ public static class UserInfo
 
         string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/studyWord?member_idx=" + userIdx;
 
-        string date = "2023-05-03T17:49:12";
-        StudyWord item = new StudyWord(word, userLevel, successLevel, date);
+
+		string time = DateTime.Now.ToString("HH:mm:ss");
+		string date = DateTime.Now.ToString("yyyy/MM/dd") + "T" + time;
+
+
+
+		StudyWord item = new StudyWord(word, userLevel, successLevel, date);
         string str = JsonUtility.ToJson(item);
 
 
