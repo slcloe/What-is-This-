@@ -35,8 +35,8 @@ public class LoginDirector : MonoBehaviour
 	Button btLogin;
 
     static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/login";
-
-    void Start()
+	public static int language = 0;
+	void Start()
     {
         idInput = GameObject.Find("IDInputField").GetComponent<InputField>();
         pwInput = GameObject.Find("PWInputField").GetComponent<InputField>();
@@ -44,6 +44,7 @@ public class LoginDirector : MonoBehaviour
         btLogin = GameObject.Find("ButtonLogin").GetComponent<Button>();
 
         btLogin.onClick.AddListener(CheckValidation);
+
     }
 
     void CheckValidation()
@@ -91,6 +92,7 @@ public class LoginDirector : MonoBehaviour
                 UserInfo.SetUserId(data.userId);
                 UserInfo.GetLevel();
                 UserInfo.GetAmendsRequest();
+                UserInfo.SetName(data.name);
             }
             else
             {

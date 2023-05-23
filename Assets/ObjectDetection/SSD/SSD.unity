@@ -1463,7 +1463,7 @@ GameObject:
   - component: {fileID: 2098397904}
   - component: {fileID: 2098397903}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ssdText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

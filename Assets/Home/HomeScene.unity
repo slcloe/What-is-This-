@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 889716713}
   - component: {fileID: 889716712}
   m_Layer: 5
-  m_Name: Text
+  m_Name: PopupText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

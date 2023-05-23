@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine.Animations;
 using System.Reflection;
 using UnityEditor;
+using TensorFlowLite;
 
 [Serializable]
 public class analysis_info
@@ -37,10 +38,18 @@ public class ParentDirector : MonoBehaviour
 	public static List<float> successRate2 = new List<float>();
 	public static List<float> successRate3 = new List<float>();
 	public static List<analysis_result> results = new List<analysis_result>();
+	public static Text parentHome;
+	public static Text btnParentBack;
+	Text childName;
+	
 
 	// Start is called before the first frame update
 	void Start()
     {
+		parentHome = GameObject.Find("TextparentHome").GetComponent<Text>();
+		btnParentBack = GameObject.Find("btnParentBack").GetComponentInChildren<Text>();
+		childName = GameObject.Find("childName").GetComponent<Text>();
+		childName.text = UserInfo.GetName();
 		//Screen.orientation = ScreenOrientation.Portrait;
 		SetDays();
 		if (results.Count > 0) { results.Clear(); }
@@ -51,12 +60,6 @@ public class ParentDirector : MonoBehaviour
 		{
 			RequestAnalysisInfo(days[i + 1], days[i ]);
 		}
-
-		foreach(analysis_result result in results)
-		{
-			Debug.Log(result.successRate1);
-		}
-
 	}
 
 	void SetDays()
