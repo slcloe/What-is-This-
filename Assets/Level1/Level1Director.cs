@@ -7,6 +7,7 @@ using TensorFlowLite;
 
 public class Level1Director : MonoBehaviour
 {
+    AudioSource audioSource;
     Text learning_word;
     Image learning_img;
     Text[] option = new Text[3];
@@ -18,6 +19,7 @@ public class Level1Director : MonoBehaviour
 
     void Start()
     {
+        audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
         learning_word = GameObject.Find("learning_word").GetComponent<Text>();
         learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
@@ -30,6 +32,7 @@ public class Level1Director : MonoBehaviour
 
         popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level1PopUpDirector>();
 
+        SpeakCommand();
         //
         //if (word == null ) { word = string.Empty; }
         //learning_word.text = word;
@@ -44,9 +47,9 @@ public class Level1Director : MonoBehaviour
         SetOnClickListener();
 	}
 
-    void Update()
+    void SpeakCommand()
     {
-        
+        audioSource.PlayOneShot(TTS.GetAudio("맞는 단어를 찾아보세요."));
     }
 
     void SetOnClickListener()
