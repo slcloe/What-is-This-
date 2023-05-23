@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ColorSet
 {
-	public int r, g, b;
+	public float r, g, b;
 	public float a;
-	public ColorSet(int r, int g, int b, float a)
+	public ColorSet(float r, float g, float b, float a)
 	{
 		this.r = r;
 		this.g = g;
@@ -32,12 +32,17 @@ public class Window_graph : MonoBehaviour
 
 		List<float> valueList = new List<float>() { 5, 100, 56, 45, 30, 22, 33, 100 };
 		List<float> valueList1 = new List<float>() { 10, 20, 30, 40, 50, 60, 70, 80 };
+		List<float> valueList2 = new List<float>() { 7, 22, 40, 65, 55, 70, 80, 90 };
 
-		ColorSet color1 = new ColorSet(0,1,0,1);
-		ColorSet color2 = new ColorSet(1,0,0,1);
+		//ColorSet color1 = new ColorSet(0,1,0,1);
+		//ColorSet color2 = new ColorSet(1,0,0,1);
+		ColorSet color1 = new ColorSet(130f / 255f, 169f / 255f, 102f / 255f, 1);
+		ColorSet color2 = new ColorSet(255f / 255f, 192f / 255f, 0f / 255f, 1);
+		ColorSet color3 = new ColorSet(244f / 255f, 149f / 255f, 101f / 255f, 1);
 
 		ShowGraph(valueList,color1);
 		ShowGraph(valueList1,color2);
+		ShowGraph(valueList2, color3);
 		ShowGraph(ParentDirector.successRate1, color1);
 	}
 

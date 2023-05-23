@@ -63,16 +63,16 @@ public class AmendDirector : MonoBehaviour
 		inputPeriod = GameObject.Find("inputPeriod").GetComponent<InputField>();
 		btSendInfo = GameObject.Find("ButtonSend").GetComponent<Button>();
 		GetAmendInfo();
-		if (aminfo.amends == "" || aminfo.amends.Equals("null"))
+		if (aminfo.amends == "")
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품을 입력해주세요.";
 		else
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.amends;
 
-		if (aminfo.goal == 0)
+		if (aminfo.amends == "")
 			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품수여주기를 입력해주세요.";
 		else
 			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.remain.ToString() + "개";
-
+		
 		btSendInfo.onClick.AddListener(SendAmendInfo);
 	}
 	
@@ -151,7 +151,7 @@ public class AmendDirector : MonoBehaviour
 			}
 			else
 			{
-				//Toast.MakeToast(text);
+				//Toast.MakeToast("보상이 저장되었습니다.");
 			}
 		}
 		catch (WebException e)
