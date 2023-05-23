@@ -11,12 +11,19 @@ public class Level2PopUpDirector : MonoBehaviour
     GameObject textDirectionObject;
     GameObject btNextObject;
 
+    AudioSource audioSource;
+    public AudioClip success_audio;
+    public AudioClip failure_audio;
+
     void Start()
     {
         successFailure = GameObject.Find("SuccessFailure").GetComponent<Text>();
         textDirectionObject = GameObject.Find("TextDirection");
         btNextObject = GameObject.Find("ButtonNext");
         popup = GameObject.Find("PopUpWindow");
+
+
+        audioSource = GameObject.Find("Level2Audio").GetComponent<AudioSource>();
 
 
         popup.SetActive(false);
@@ -28,6 +35,7 @@ public class Level2PopUpDirector : MonoBehaviour
         popup.SetActive(true);
         if (success)
         {
+            audioSource.PlayOneShot(success_audio);
             successFailure.text = "성공!";
             ColorUtility.TryParseHtmlString("#039508", out color);
             successFailure.color = color;
@@ -44,6 +52,7 @@ public class Level2PopUpDirector : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(failure_audio);
             UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 1);
             successFailure.text = "실패!";
             ColorUtility.TryParseHtmlString("#E00010", out color);
