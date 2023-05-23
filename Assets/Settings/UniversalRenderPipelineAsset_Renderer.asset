@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CameraTextureBackground
   m_EditorClassIdentifier: 
   m_Active: 1
---- !u!114 &-415800128433664513
+--- !u!114 &-3762251697613462480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,8 +40,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RendererFeatures:
   - {fileID: -8187111965855246571}
-  - {fileID: -415800128433664513}
-  m_RendererFeatureMap: 1517d9520b89618eff4d2677fcc73afa
+  - {fileID: -3762251697613462480}
+  m_RendererFeatureMap: 1517d9520b89618e30a423a803ccc9cb
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
