@@ -71,15 +71,23 @@ public class AmendDirector : MonoBehaviour
 		if (aminfo.amends == "")
 			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품수여주기를 입력해주세요.";
 		else
-			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.remain.ToString() + "개";
+			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.remain.ToString();
 		
-		btSendInfo.onClick.AddListener(SendAmendInfo);
+		btSendInfo.onClick.AddListener(CheckValidation);
 	}
 	
 	void CheckValidation()
 	{
-		if (inputPrize != null || aminfo.amends != null) { return; }
-		if (inputPeriod != null || aminfo.goal != 0) { return; }
+		if (inputPrize.text == "" || aminfo.amends == ""){
+			//Toast.MakeToast("상품 이름을 입력해주세요.");
+			Debug.Log("상품 이름을 입력해주세요.");
+			return;
+		}
+		if (inputPeriod.text == ""){
+			//Toast.MakeToast("상품 수여 주기를 입력해주세요.");
+			Debug.Log("상품 수여 주기를 입력해주세요.");
+			return;
+		}
 		SendAmendInfo();
 	}
 
@@ -148,10 +156,14 @@ public class AmendDirector : MonoBehaviour
 			if (response.StatusCode == HttpStatusCode.OK)
 			{
 				AmendInfo data = JsonUtility.FromJson<AmendInfo>(json);
+
+				UserInfo.SetAmends(new Amends((int)data.idx, data.amends, data.goal, data.remain));
+
+				//Toast.MakeToast("보상이 저장되었습니다. ["+data.amends+"/"+data.goal+"]");
 			}
 			else
 			{
-				//Toast.MakeToast("보상이 저장되었습니다.");
+				//Toast.MakeToast(text);
 			}
 		}
 		catch (WebException e)
