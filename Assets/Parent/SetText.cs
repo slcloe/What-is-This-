@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class SetText : MonoBehaviour
 {
-	public static Text[] parentText;
+	public static Text[] texts;
 	// Start is called before the first frame update
 	void Awake()
     {
-		parentText = GetComponentsInChildren<Text>();
-		Debug.Log(parentText.Length);
-		for (int i = 0; i < parentText.Length; i++)
+		texts = GetComponentsInChildren<Text>();
+		Debug.Log(texts.Length);
+		for (int i = 0; i < texts.Length; i++)
 		{
-			Debug.Log(i.ToString() + ": " + parentText[i].text);
+			Debug.Log(i.ToString() + ": " + texts[i].text);
 		}
 	}
 

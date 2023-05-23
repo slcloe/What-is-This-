@@ -38,7 +38,7 @@ public class HomePopUpDirector : MonoBehaviour
     GameObject popup;
     Button btExitPopUp;
     Button btNext;
-
+    Text text;
     InputField passwordInput;
 
     static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/plogin";
@@ -48,6 +48,11 @@ public class HomePopUpDirector : MonoBehaviour
         btNext = GameObject.Find("ButtonNext").GetComponent<Button>();
         popup = GameObject.Find("PopUpWindow");
         passwordInput = GameObject.Find("PasswordInputField").GetComponent<InputField>();
+        text = GameObject.Find("PopupText").GetComponent<Text>();
+        if (LoginDirector.language == 0)
+            text.text = "부모 비밀번호를\n입력해주세요.";
+        else
+            text.text = "Please enter\nparent password";
 		popup.SetActive(false);
     }
 
