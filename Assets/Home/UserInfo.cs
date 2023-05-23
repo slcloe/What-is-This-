@@ -107,7 +107,6 @@ public static class UserInfo
     }
     public static bool IsAmendsTime()
     {
-        Debug.Log(amends.amends);
         if (amends != null && amends.amends != "" && amends.remain == 0) return true;
         else return false;
     }
