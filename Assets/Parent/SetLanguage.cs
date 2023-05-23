@@ -61,5 +61,5 @@ public class SetLanguage : MonoBehaviour
 	}
 
 
-	void SetTextContent(Text text, string str) { text.text = str; }
+	public static void SetTextContent(Text text, string str) { text.text = str; }
 }

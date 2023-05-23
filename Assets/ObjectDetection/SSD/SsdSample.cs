@@ -28,6 +28,7 @@ namespace TensorFlowLite
         private string[] labels;
         public static bool is_set_frame = false;
         public static string detection_text;
+        private Text text;
 
         private void Start()
         {
@@ -66,8 +67,12 @@ namespace TensorFlowLite
             labels = labelMap.text.Split('\n');
 
             GetComponent<WebCamInput>().OnTextureUpdate.AddListener(Invoke);
-
-        }
+            text = GameObject.Find("ssdText").GetComponent<Text>();
+			if (LoginDirector.language == 0)
+				text.text = "사물을 찾아보세요";
+			else
+				text.text = "Search Object.";
+		}
 
         private void OnDestroy()
         {
