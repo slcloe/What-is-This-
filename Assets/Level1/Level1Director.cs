@@ -9,22 +9,86 @@ public class Level1Director : MonoBehaviour
 {
     Text learning_word;
     Image learning_img;
+    Text[] option = new Text[3];
+    Button[] btn_option = new Button[3];
+    string word = TensorFlowLite.SsdSample.detection_text;
+    bool success = false;
 
+    Level1PopUpDirector popupDirector;
 
     void Start()
     {
         learning_word = GameObject.Find("learning_word").GetComponent<Text>();
         learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
-        string word = TensorFlowLite.SsdSample.detection_text;
-        if (word == null ) { word = string.Empty; }
-        learning_word.text = word;
+        option[0] = GameObject.Find("Button_learn1").GetComponentInChildren<Text>();
+        option[1] = GameObject.Find("Button_learn2").GetComponentInChildren<Text>();
+        option[2] = GameObject.Find("Button_learn3").GetComponentInChildren<Text>();
+        btn_option[0] = GameObject.Find("Button_learn1").GetComponent<Button>();
+        btn_option[1] = GameObject.Find("Button_learn2").GetComponent<Button>();
+        btn_option[2] = GameObject.Find("Button_learn3").GetComponent<Button>();
 
-        learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
-    }
+        popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level1PopUpDirector>();
+
+        //
+        //if (word == null ) { word = string.Empty; }
+        //learning_word.text = word;
+        string[] strs = new string[3];
+		TensorFlowLite.Consonant cons = new TensorFlowLite.Consonant(word);
+        
+        option[0].text = cons.get_word(0);
+		option[1].text = cons.get_word(1);
+		option[2].text = cons.get_word(2);
+
+		learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
+        SetOnClickListener();
+	}
 
     void Update()
     {
         
     }
+
+    void SetOnClickListener()
+    {
+        btn_option[0].onClick.AddListener(CheckIsCorrect_0);
+        btn_option[1].onClick.AddListener(CheckIsCorrect_1);
+        btn_option[2].onClick.AddListener(CheckIsCorrect_2);
+    }
+
+    void CheckIsCorrect_0()
+    {
+        if (option[0].text.Equals(word))
+            success = true;
+        else
+            success = false;
+		popupDirector.ShowPopUp(success);
+	}
+	void CheckIsCorrect_1()
+	{
+		if (option[1].text.Equals(word))
+			success = true;
+		else
+			success = false;
+		popupDirector.ShowPopUp(success);
+	}
+	void CheckIsCorrect_2()
+	{
+		if (option[2].text.Equals(word))
+			success = true;
+		else
+			success = false;
+		popupDirector.ShowPopUp(success);
+	}
+    //void CheckSuccess()
+    //{
+    //    if (success)
+    //    {
+
+    //    }
+    //    else
+    //    {
+
+    //    }
+    //}
 }

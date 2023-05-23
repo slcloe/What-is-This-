@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class Level2Director : MonoBehaviour
 {
     AudioSource audioSource;
+    Level2PopUpDirector popupDirector;
 
     Button btSound;
     Button btSpeech;
     Image timer;
+    Image learning_img;
+    Text learning_word;
 
     private float time_start;
     private float time_current;
@@ -19,16 +22,23 @@ public class Level2Director : MonoBehaviour
     AudioClip recordClip = null;
 
     string filePath;
+    string word = TensorFlowLite.SsdSample.detection_text;
+
 
     void Start()
     {
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
+        popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level2PopUpDirector>();
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         btSpeech = GameObject.Find("ButtonSpeech").GetComponent<Button>();
         timer = GameObject.Find("Timer").GetComponent<Image>();
+        learning_word = GameObject.Find("TextWord").GetComponent<Text>();
+        learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
+        learning_word.text = word;
+        learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
         SetOnClickListener();
-        SpeakCommand();
+        SpeakCommand();        
     }
     void Update()
     {
@@ -44,7 +54,15 @@ public class Level2Director : MonoBehaviour
                 isRecording = false;
                 btSpeech.interactable = true;
                 StopRecording();
-                STT.SendAudio(filePath);
+                string result = STT.SendAudio(filePath);
+                if(result == null)
+                {
+                    audioSource.PlayOneShot(TTS.GetAudio("Îã§Ïãú ÎßêÌï¥Î≥¥ÏÑ∏Ïöî."));
+                }
+                else
+                {
+                    popupDirector.ShowPopUp(result.Equals(word));
+                }
             }
         }
 
@@ -58,22 +76,17 @@ public class Level2Director : MonoBehaviour
 
     void SpeakCommand()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("µ˚∂Û ∏ª«ÿ∫∏ººø‰."));
+        audioSource.PlayOneShot(TTS.GetAudio("Îî∞Îùº ÎßêÌï¥Î≥¥ÏÑ∏Ïöî."));
     }
 
     void SpeakSound()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("∞ÌæÁ¿Ã"));
+        audioSource.PlayOneShot(TTS.GetAudio(word));
     }
     void StartSpeech()
     {
-        //∏ª«œ±‚ πˆ∆∞ ∫Ò»∞º∫»≠
         btSpeech.interactable = false;
-
-        //≥Ï¿Ω Ω√¿€
         recordClip = Microphone.Start(Microphone.devices[0], false, 5, 16000);
-
-        //≈∏¿Ã∏” Ω√¿€Ω√∞£ º≥¡§
         ResetTimer();
     }
     void ResetTimer()
@@ -98,6 +111,4 @@ public class Level2Director : MonoBehaviour
             SavWav.Save(filePath, recordClip);
         }
     }
-
-
 }
