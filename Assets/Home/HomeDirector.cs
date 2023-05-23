@@ -19,6 +19,12 @@ public class HomeDirector : MonoBehaviour
     float velocity;
     float ratio;
 
+
+    private void Awake()
+    {
+        GameObject obj = GameObject.Find("MainAudio");
+        Destroy(obj);
+    }
     void Start()
     {
 		scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();

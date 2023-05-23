@@ -37,7 +37,10 @@ public class AmendsDirector : MonoBehaviour
 
     void GetImage()
     {
-        string text = UserInfo.GetAmends().amends;
+        Amends amends = UserInfo.GetAmends();
+        if (!UserInfo.IsAmendsTime()) return;
+        string text = amends.amends;
+        
         string apiUrl = "https://openapi.naver.com/v1/search/image?query=" + text + "&display=1";
 
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
