@@ -61,9 +61,14 @@ public static class UserInfo
 	private static double successRate1;
 	private static int level_avg;
 	private static int cnt_word;
+    private static string name;
 
     private static Amends amends = null;
     
+
+    public static void SetName(string user) { name = user; }
+
+    public static string GetName() { return name; }
 
     public static void SetUserId(string id)
     {

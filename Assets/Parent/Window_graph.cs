@@ -25,7 +25,7 @@ public class Window_graph : MonoBehaviour
 
 	private void Start()
 	{
-		Debug.Log("graphdirector");
+		//Debug.Log("graphdirector");
 		graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
 		labelTemplateX = graphContainer.Find("labelTemplateX").GetComponent<RectTransform>();
 		labelTemplateY = graphContainer.Find("labelTemplateY").GetComponent<RectTransform>();

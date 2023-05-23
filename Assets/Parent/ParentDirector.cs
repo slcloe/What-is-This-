@@ -37,10 +37,16 @@ public class ParentDirector : MonoBehaviour
 	public static List<float> successRate2 = new List<float>();
 	public static List<float> successRate3 = new List<float>();
 	public static List<analysis_result> results = new List<analysis_result>();
+	public static Text parentHome;
+	public static Text btnParentBack;
+	
 
 	// Start is called before the first frame update
 	void Start()
     {
+		parentHome = GameObject.Find("TextparentHome").GetComponent<Text>();
+		btnParentBack = GameObject.Find("btnParentBack").GetComponentInChildren<Text>();
+		
 		//Screen.orientation = ScreenOrientation.Portrait;
 		SetDays();
 		if (results.Count > 0) { results.Clear(); }
