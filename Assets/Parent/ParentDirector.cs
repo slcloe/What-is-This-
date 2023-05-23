@@ -49,7 +49,7 @@ public class ParentDirector : MonoBehaviour
 		if (successRate3.Count > 0) { successRate3.Clear(); }
 		for(int i=7;i>=0;i--)
 		{
-			RequestAnalysisInfo(days[i], days[i+1]);
+			RequestAnalysisInfo(days[i + 1], days[i ]);
 		}
 
 		foreach(analysis_result result in results)
@@ -61,8 +61,9 @@ public class ParentDirector : MonoBehaviour
 
 	void SetDays()
 	{
+		string time_0 = DateTime.Now.ToString("HH:mm:ss");
 		string time = "T00:00:00";
-		days[0] = DateTime.Now.ToString("yyyy/MM/dd") + time;
+		days[0] = DateTime.Now.ToString("yyyy/MM/dd") + "T" + time_0;
 		for (int i=0;i<8;i++)
 		{
 			days[i + 1] = DateTime.Now.AddDays(-7 * (i+1)).ToString("yyyy/MM/dd") + time;
@@ -81,7 +82,7 @@ public class ParentDirector : MonoBehaviour
 		info.member_idx = 1;
 		info.older_date = older;
 		info.newer_date = newer;
-		string apiUrl = "http://121.160.119.135:8081/getAnalysis/date/between?member_idx=" + info.member_idx.ToString() + "&older_date="+info.older_date+"&newer_date="+info.newer_date;
+		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getAnalysis/date/between?member_idx=" + info.member_idx.ToString() + "&older_date="+info.older_date+"&newer_date="+info.newer_date;
 
 
 		string str = JsonUtility.ToJson(info);

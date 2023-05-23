@@ -41,15 +41,14 @@ public class HomePopUpDirector : MonoBehaviour
 
     InputField passwordInput;
 
-    static private string apiUrl = "http://121.160.119.135:8081/plogin";
+    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/plogin";
     void Start()
     {
         btExitPopUp = GameObject.Find("ButtonExitPopUp").GetComponent<Button>();
         btNext = GameObject.Find("ButtonNext").GetComponent<Button>();
         popup = GameObject.Find("PopUpWindow");
         passwordInput = GameObject.Find("PasswordInputField").GetComponent<InputField>();
-
-        popup.SetActive(false);
+		popup.SetActive(false);
     }
 
     public void ShowPopUp()
