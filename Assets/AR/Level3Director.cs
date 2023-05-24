@@ -21,14 +21,34 @@ public class Level3Director : MonoBehaviour
 
         for (int i = 0; i < 3; i++) brokenHearts[i].SetActive(false);
         SpeakCommand();
-    }
+		if (LoginDirector.language == 0) SetKorText();
+		else SetEngText();
+	}
+	void SetEngText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "Find hidden letters");
+		SetLanguage.SetTextContent(SetText.texts[1], "Go Back");
+		SetLanguage.SetTextContent(SetText.texts[3], "Success!");
+		SetLanguage.SetTextContent(SetText.texts[4], "Go Back");
+	}
+	void SetKorText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "숨어 있는 글자를 찾아보세요");
+		SetLanguage.SetTextContent(SetText.texts[1], "그만할래요");
+		SetLanguage.SetTextContent(SetText.texts[3], "성공!");
+		SetLanguage.SetTextContent(SetText.texts[4], "처음으로");
+	}
 
-    void SpeakCommand()
+	void SpeakCommand()
     {
-        audioSource.PlayOneShot(TTS.GetAudio(0, "숨어 있는 글자를 찾아보세요."));
-    }
+		if (LoginDirector.language == 0)
+			audioSource.PlayOneShot(TTS.GetAudio(0, "숨어 있는 글자를 찾아보세요."));
+        else
+			audioSource.PlayOneShot(TTS.GetAudio(1, "Find hidden letters"));
 
-    void ReduceLife()
+	}
+
+	void ReduceLife()
     {
         life--;
         hearts[life].SetActive(false);
