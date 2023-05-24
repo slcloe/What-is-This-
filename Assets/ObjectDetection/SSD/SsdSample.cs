@@ -28,7 +28,7 @@ namespace TensorFlowLite
         private string[] labels;
         public static bool is_set_frame = false;
         public static string detection_text;
-        private Text text;
+        private Text[] text;
 
         private void Start()
         {
@@ -56,6 +56,7 @@ namespace TensorFlowLite
 
 			// Init frames
 			frames = new Text[10];
+            text = new Text[2];
             Transform parent = frameContainer.transform;
             for (int i = 0; i < frames.Length; i++)
             {
@@ -65,13 +66,22 @@ namespace TensorFlowLite
 
             // Labels
             labels = labelMap.text.Split('\n');
-
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
             GetComponent<WebCamInput>().OnTextureUpdate.AddListener(Invoke);
-            text = GameObject.Find("ssdText").GetComponent<Text>();
+            text[0] = GameObject.Find("ssdText").GetComponent<Text>();
+            text[1] = GameObject.Find("ButtonQuit").GetComponentInChildren<Text>();
 			if (LoginDirector.language == 0)
-				text.text = "사물을 찾아보세요";
+            {
+				text[0].text = "사물을 찾아보세요";
+                text[1].text = "그만할래요";
+            }
+
 			else
-				text.text = "Search Object.";
+            {
+				text[0].text = "Search Object";
+                text[1].text = "Go Back";
+            }
+
 		}
 
         private void OnDestroy()

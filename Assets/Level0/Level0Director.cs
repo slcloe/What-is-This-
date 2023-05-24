@@ -30,7 +30,10 @@ public class Level0Director : MonoBehaviour
         SetOnClickListener();
         SpeakCommand();
         Invoke("SpeakSound", 2);
-    }
+        if (LoginDirector.language == 0) SetKorText();
+        else SetEngText();
+
+	}
 	void SetEngText()
 	{
 		SetLanguage.SetTextContent(SetText.texts[1], "Audio");
@@ -70,6 +73,9 @@ public class Level0Director : MonoBehaviour
 
     void SpeakCommand()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("ÀÌ°Ç ¹¹Áö?"));
-    }
+		if (LoginDirector.language == 0)
+			audioSource.PlayOneShot(TTS.GetAudio("ÀÌ°Ç ¹¹Áö?"));
+        else
+			audioSource.PlayOneShot(TTS.GetAudio("what is this"));
+	}
 }
