@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Vars : MonoBehaviour
 {
-    public static int test1=0;
+    public static int SelectedLetter =0;
     public static int TotalWords = 20;
+
+    public static string word = "Å°º¸µå";
     // Start is called before the first frame update
     void Start()
     {

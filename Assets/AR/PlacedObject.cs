@@ -2,17 +2,18 @@ using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlacedObject : MonoBehaviour
 {
+
     [SerializeField]
     private GameObject Cube;
     private GameObject CubeSelected;
-    // Start is called before the first frame update
 
     public bool IsSelected
     {
-        get => SelectedObject == this;
+        get =>  SelectedObject == this;
     }
 
     private static PlacedObject selectedObject;
@@ -31,9 +32,12 @@ public class PlacedObject : MonoBehaviour
              selectedObject = value;
             if (value != null)
                 {
+                string ParentName= value.transform.parent.name;
+
+
+
                     value.Cube.SetActive(false);
-                Destroy(value.Cube);
-                    value.CubeSelected.SetActive(true);
+                Destroy(value);
             }
         }
     }

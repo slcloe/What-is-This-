@@ -9,6 +9,7 @@ namespace TensorFlowLite
 {
    public class Consonant
     {
+        int idx=0;
         int text_len = 0;
         string word;
         string[] strs = new string[3];
@@ -98,6 +99,9 @@ namespace TensorFlowLite
             }
             return str;
         }
+
+
+
         void set_words()
         {
             int tmp = UnityEngine.Random.Range(1, 4);
@@ -145,6 +149,41 @@ namespace TensorFlowLite
 				}
             }
         }
+
+
+        public int lsSize()
+        {
+            return lst.Count;
+        }
+
+        public int[] GetCorrectArray()
+        {
+            int[] correct = new int[lst.Count * 3];
+
+            int idx = 0;
+            foreach (letter ltr in lst)
+            {
+                correct[idx++] = ltr.idx[0];
+                correct[idx++] = ltr.idx[1];
+                correct[idx++] = ltr.idx[2];
+            }
+            return correct;
+        }
+
+        public bool IsCorrect(int[] correct, int letter)
+        {
+            if (idx % 3 == 2 && correct[idx] == 0)
+                idx++;
+            if (correct[idx] != letter) return false;
+            else
+            {
+                idx++;
+                return true;
+            }
+            // idx : class public variable 로 수정해서 ref 변수로 쓰기
+        }
+
+
     }
 }
 
