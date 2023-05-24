@@ -85,8 +85,7 @@ public class Level2PopUpDirector : MonoBehaviour
 
     void GotoLevel3()
     {
-        //SceneManager.LoadScene("Level3Scene");
-        Debug.Log("load level3 scene");
+        SceneManager.LoadScene("AR");
     }
     void GotoObjectDetection()
     { 
