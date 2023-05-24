@@ -38,9 +38,29 @@ public class Level2Director : MonoBehaviour
         learning_word.text = word;
         learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
         SetOnClickListener();
-        SpeakCommand();        
-    }
-    void Update()
+        SpeakCommand();
+		if (LoginDirector.language == 0) SetKorText();
+		else SetEngText();
+	}
+	void SetEngText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "Listen and Repeat");
+		SetLanguage.SetTextContent(SetText.texts[2], "Audio");
+		SetLanguage.SetTextContent(SetText.texts[3], "Record");
+		SetLanguage.SetTextContent(SetText.texts[4], "Success!");
+		SetLanguage.SetTextContent(SetText.texts[5], "Next Step");
+		SetLanguage.SetTextContent(SetText.texts[6], "Go Back");
+	}
+	void SetKorText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "따라 말해보세요");
+		SetLanguage.SetTextContent(SetText.texts[2], "소리 듣기");
+		SetLanguage.SetTextContent(SetText.texts[3], "말하기");
+		SetLanguage.SetTextContent(SetText.texts[4], "성공!");
+		SetLanguage.SetTextContent(SetText.texts[5], "다음 단계로");
+		SetLanguage.SetTextContent(SetText.texts[6], "그만할래요");
+	}
+	void Update()
     {
         if (isRecording)
         {

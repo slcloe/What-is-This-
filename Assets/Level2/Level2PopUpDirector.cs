@@ -36,15 +36,21 @@ public class Level2PopUpDirector : MonoBehaviour
         if (success)
         {
             audioSource.PlayOneShot(success_audio);
-            successFailure.text = "성공!";
-            ColorUtility.TryParseHtmlString("#039508", out color);
+			if (LoginDirector.language == 0)
+				successFailure.text = "성공!";
+			else
+				successFailure.text = "success!";
+			ColorUtility.TryParseHtmlString("#039508", out color);
             successFailure.color = color;
             if (UserInfo.GetUserLevel() == 2)
             {
                 UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 2);
                 btNextObject.GetComponent<Button>().onClick.AddListener(GotoObjectDetection);
-                textDirectionObject.GetComponent<Text>().text = "처음으로";
-            }
+				if (LoginDirector.language == 0)
+					textDirectionObject.GetComponent<Text>().text = "처음으로";
+				else
+					textDirectionObject.GetComponent<Text>().text = "Go back";
+			}
             else
             {
                 btNextObject.GetComponent<Button>().onClick.AddListener(GotoLevel3);
@@ -54,8 +60,11 @@ public class Level2PopUpDirector : MonoBehaviour
         {
             audioSource.PlayOneShot(failure_audio);
             UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 1);
-            successFailure.text = "실패!";
-            ColorUtility.TryParseHtmlString("#E00010", out color);
+			if (LoginDirector.language == 0)
+				successFailure.text = "실패!";
+			else
+				successFailure.text = "fail!";
+			ColorUtility.TryParseHtmlString("#E00010", out color);
             successFailure.color = color;
             textDirectionObject.SetActive(false);
             btNextObject.SetActive(false);
@@ -66,8 +75,11 @@ public class Level2PopUpDirector : MonoBehaviour
     void SwitchToFailure()
     {
         textDirectionObject.SetActive(true);
-        textDirectionObject.GetComponent<Text>().text = "처음으로";
-        btNextObject.SetActive(true);
+		if (LoginDirector.language == 0)
+			textDirectionObject.GetComponent<Text>().text = "처음으로";
+		else
+			textDirectionObject.GetComponent<Text>().text = "Go back";
+		btNextObject.SetActive(true);
         btNextObject.GetComponent<Button>().onClick.AddListener(GotoObjectDetection);
     }
 
