@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 using System.IO;
 using System.Net;
@@ -39,7 +40,7 @@ public class ParentDirector : MonoBehaviour
 	public static List<float> successRate3 = new List<float>();
 	public static List<analysis_result> results = new List<analysis_result>();
 	public static Text parentHome;
-	public static Text btnParentBack;
+	public static Button btnParentBack;
 	Text childName;
 	
 
@@ -47,7 +48,7 @@ public class ParentDirector : MonoBehaviour
 	void Start()
     {
 		parentHome = GameObject.Find("TextparentHome").GetComponent<Text>();
-		btnParentBack = GameObject.Find("btnParentBack").GetComponentInChildren<Text>();
+		btnParentBack = GameObject.Find("btnParentBack").GetComponent<Button>();
 		childName = GameObject.Find("childName").GetComponent<Text>();
 		childName.text = UserInfo.GetName();
 		//Screen.orientation = ScreenOrientation.Portrait;
@@ -60,7 +61,14 @@ public class ParentDirector : MonoBehaviour
 		{
 			RequestAnalysisInfo(days[i + 1], days[i ]);
 		}
+
+		btnParentBack.onClick.AddListener(GoToHomeScene);
 	}
+
+	void GoToHomeScene()
+    {
+		SceneManager.LoadScene("HomeScene");
+    }
 
 	void SetDays()
 	{

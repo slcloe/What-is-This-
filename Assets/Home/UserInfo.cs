@@ -48,6 +48,13 @@ public class Amends
     public string amends;
     public int goal;
     public int remain;
+    public Amends(int idx, string amends, int goal, int remain)
+    {
+        this.idx = idx;
+        this.amends = amends;
+        this.goal = goal;
+        this.remain = remain;
+    }
 }
 
 public static class UserInfo

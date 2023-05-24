@@ -63,23 +63,31 @@ public class AmendDirector : MonoBehaviour
 		inputPeriod = GameObject.Find("inputPeriod").GetComponent<InputField>();
 		btSendInfo = GameObject.Find("ButtonSend").GetComponent<Button>();
 		GetAmendInfo();
-		if (aminfo.amends == "" || aminfo.amends.Equals("null"))
+		if (aminfo.amends == "")
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품을 입력해주세요.";
 		else
 			GameObject.Find("inputPrize").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.amends;
 
-		if (aminfo.goal == 0)
+		if (aminfo.amends == "")
 			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = "상품수여주기를 입력해주세요.";
 		else
-			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.remain.ToString() + "개";
-
-		btSendInfo.onClick.AddListener(SendAmendInfo);
+			GameObject.Find("inputPeriod").GetComponent<InputField>().placeholder.GetComponent<Text>().text = aminfo.remain.ToString();
+		
+		btSendInfo.onClick.AddListener(CheckValidation);
 	}
 	
 	void CheckValidation()
 	{
-		if (inputPrize != null || aminfo.amends != null) { return; }
-		if (inputPeriod != null || aminfo.goal != 0) { return; }
+		if (inputPrize.text == "" || aminfo.amends == ""){
+			//Toast.MakeToast("상품 이름을 입력해주세요.");
+			Debug.Log("상품 이름을 입력해주세요.");
+			return;
+		}
+		if (inputPeriod.text == ""){
+			//Toast.MakeToast("상품 수여 주기를 입력해주세요.");
+			Debug.Log("상품 수여 주기를 입력해주세요.");
+			return;
+		}
 		SendAmendInfo();
 	}
 
@@ -148,6 +156,10 @@ public class AmendDirector : MonoBehaviour
 			if (response.StatusCode == HttpStatusCode.OK)
 			{
 				AmendInfo data = JsonUtility.FromJson<AmendInfo>(json);
+
+				UserInfo.SetAmends(new Amends((int)data.idx, data.amends, data.goal, data.remain));
+
+				//Toast.MakeToast("보상이 저장되었습니다. ["+data.amends+"/"+data.goal+"]");
 			}
 			else
 			{
