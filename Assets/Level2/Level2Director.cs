@@ -35,6 +35,7 @@ public class Level2Director : MonoBehaviour
         learning_word = GameObject.Find("TextWord").GetComponent<Text>();
         learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
+        word = word.Replace("\n", "");
         learning_word.text = word;
         learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
         SetOnClickListener();
