@@ -45,12 +45,35 @@ public class Level1Director : MonoBehaviour
 
 		learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
         SetOnClickListener();
+
+		if (LoginDirector.language == 0)
+			SetKorText();
+		else
+			SetEngText();
+
+
+	}
+
+    void SetKorText()
+    {
+        SetLanguage.SetTextContent(SetText.texts[0], "맞는 단어를 찾아보세요");
+		SetLanguage.SetTextContent(SetText.texts[5], "다음 단계로");
+		SetLanguage.SetTextContent(SetText.texts[6], "그만할래요");
+	}
+    void SetEngText()
+    {
+		SetLanguage.SetTextContent(SetText.texts[0], "Find the right word");
+		SetLanguage.SetTextContent(SetText.texts[5], "Next Step");
+		SetLanguage.SetTextContent(SetText.texts[6], "Go Back");
 	}
 
     void SpeakCommand()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("맞는 단어를 찾아보세요."));
-    }
+		if (LoginDirector.language == 0)
+			audioSource.PlayOneShot(TTS.GetAudio("맞는 단어를 찾아보세요."));
+        else
+			audioSource.PlayOneShot(TTS.GetAudio("Find the right word"));
+	}
 
     void SetOnClickListener()
     {
