@@ -45,9 +45,11 @@ public class LoginDirector : MonoBehaviour
 
         btLogin.onClick.AddListener(CheckValidation);
 
-    }
 
-    void CheckValidation()
+	}
+	
+
+	void CheckValidation()
     {
         /*        if (idInput.text == "") Toast.MakeToast("아이디를 입력해주세요.");
                 else if (pwInput.text == "") Toast.MakeToast("비밀번호를 입력해주세요.");
