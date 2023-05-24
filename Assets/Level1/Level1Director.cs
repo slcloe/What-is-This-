@@ -70,9 +70,9 @@ public class Level1Director : MonoBehaviour
     void SpeakCommand()
     {
 		if (LoginDirector.language == 0)
-			audioSource.PlayOneShot(TTS.GetAudio("맞는 단어를 찾아보세요."));
+			audioSource.PlayOneShot(TTS.GetAudio(0, "맞는 단어를 찾아보세요."));
         else
-			audioSource.PlayOneShot(TTS.GetAudio("Find the right word"));
+			audioSource.PlayOneShot(TTS.GetAudio(1, "Find the right word"));
 	}
 
     void SetOnClickListener()

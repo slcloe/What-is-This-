@@ -68,14 +68,14 @@ public class Level0Director : MonoBehaviour
 
     void SpeakSound()
     {
-        audioSource.PlayOneShot(TTS.GetAudio(word));
+        audioSource.PlayOneShot(TTS.GetAudio(0, word));
     }
 
     void SpeakCommand()
     {
 		if (LoginDirector.language == 0)
-			audioSource.PlayOneShot(TTS.GetAudio("ÀÌ°Ç ¹¹Áö?"));
+			audioSource.PlayOneShot(TTS.GetAudio(0, "ÀÌ°Ç ¹¹Áö?"));
         else
-			audioSource.PlayOneShot(TTS.GetAudio("what is this"));
+			audioSource.PlayOneShot(TTS.GetAudio(1, "what is this?"));
 	}
 }

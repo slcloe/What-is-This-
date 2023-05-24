@@ -46,12 +46,13 @@ public static class TTS
 
     static SetTTS tts;
     static private string apiUrl = "https://texttospeech.googleapis.com/v1/text:synthesize?key="+ApiKeys.Google_API_key;
-    public static AudioClip GetAudio(string text)
+    public static AudioClip GetAudio(int lang, string text)
     {
-        InitData(text);
+        if (lang == 0) InitDataKorean(text);
+        else InitDataEnglish(text);
         return CreateAudio();
     }
-    static void InitData(string text)
+    static void InitDataKorean(string text)
     {
         tts = new SetTTS();
 
@@ -61,6 +62,28 @@ public static class TTS
         SetVoice voice = new SetVoice();
         voice.languageCode = "ko-KR";
         voice.name = "ko-KR-Neural2-A";
+        voice.ssmlGender = "FEMALE";
+
+        SetAudioConfig config = new SetAudioConfig();
+        config.audioEncoding = "LINEAR16";
+        config.speakingRate = 0.85f;
+        config.pitch = -1.0f;
+
+        tts.input = input;
+        tts.voice = voice;
+        tts.audioConfig = config;
+    }
+
+    static void InitDataEnglish(string text)
+    {
+        tts = new SetTTS();
+
+        SetInput input = new SetInput();
+        input.text = text;
+
+        SetVoice voice = new SetVoice();
+        voice.languageCode = "en-US";
+        voice.name = "en-US-Neural2-G";
         voice.ssmlGender = "FEMALE";
 
         SetAudioConfig config = new SetAudioConfig();
