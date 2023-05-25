@@ -35,9 +35,9 @@ public class analysis_result
 public class ParentDirector : MonoBehaviour
 {
 	string[] days = new string[9];
-	public static List<float> successRate1 = new List<float>();
-	public static List<float> successRate2 = new List<float>();
-	public static List<float> successRate3 = new List<float>();
+	public static List<int> successRate1 = new List<int>();
+	public static List<int> successRate2 = new List<int>();
+	public static List<int> successRate3 = new List<int>();
 	public static List<analysis_result> results = new List<analysis_result>();
 	public static Text parentHome;
 	public static Button btnParentBack;
@@ -57,12 +57,35 @@ public class ParentDirector : MonoBehaviour
 		if (successRate1.Count > 0) { successRate1.Clear(); }
 		if (successRate2.Count > 0) { successRate2.Clear(); }
 		if (successRate3.Count > 0) { successRate3.Clear(); }
-		for(int i=7;i>=0;i--)
+		for (int i = 7; i >= 0; i--)
 		{
-			RequestAnalysisInfo(days[i + 1], days[i ]);
+			RequestAnalysisInfo(days[i + 1], days[i]);
+		}
+		//Debug.Log(ParentDirector.successRate1[0] + " , " + ParentDirector.successRate1[1] + " , " + ParentDirector.successRate1[2] + " , " + ParentDirector.successRate1[3] + " , " + ParentDirector.successRate1[4] + " , " + ParentDirector.successRate1[5] + " , " + ParentDirector.successRate1[6] + " , " + ParentDirector.successRate1[7] + " , ");
+
+		//for (int i = 1; i <= 8; i++)
+		//{
+		//	RequestAnalysisInfo(days[i], days[i - 1]);
+		//}
+		while (successRate1[0] == 0)
+		{
+			successRate1.RemoveAt(0);
+			successRate2.RemoveAt(0);
+			successRate3.RemoveAt(0);
+			successRate1.Add(0);
+			successRate2.Add(0);
+			successRate3.Add(0);
 		}
 
+		//Debug.Log(ParentDirector.successRate1[0] + " , " + ParentDirector.successRate1[1] + " , " + ParentDirector.successRate1[2] + " , " + ParentDirector.successRate1[3] + " , " + ParentDirector.successRate1[4] + " , " + ParentDirector.successRate1[5] + " , " + ParentDirector.successRate1[6] + " , " + ParentDirector.successRate1[7] + " , ");
+
+
 		btnParentBack.onClick.AddListener(GoToHomeScene);
+	}
+
+	void Awake()
+	{
+
 	}
 
 	void GoToHomeScene()
@@ -89,8 +112,7 @@ public class ParentDirector : MonoBehaviour
 	void RequestAnalysisInfo(string older, string newer)
 	{
 		analysis_info info = new analysis_info();
-		//info.member_idx = UserInfo.GetUserIdx();
-		info.member_idx = 1;
+		info.member_idx = UserInfo.GetUserIdx();
 		info.older_date = older;
 		info.newer_date = newer;
 		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getAnalysis/date/between?member_idx=" + info.member_idx.ToString() + "&older_date="+info.older_date+"&newer_date="+info.newer_date;
@@ -111,9 +133,9 @@ public class ParentDirector : MonoBehaviour
 
 			analysis_result result = JsonUtility.FromJson<analysis_result>(json);
 			results.Add(result);
-			successRate1.Add(result.successRate1);
-			successRate2.Add(result.successRate2);
-			successRate3.Add(result.successRate3);
+			successRate1.Add((int)result.successRate1);
+			successRate2.Add((int)result.successRate2);
+			successRate3.Add((int)result.successRate3);
 			//Debug.Log(result.idx);
 		}
 		catch (WebException e)

@@ -10,11 +10,11 @@ public class SetText : MonoBehaviour
 	void Awake()
     {
 		texts = GetComponentsInChildren<Text>();
-		Debug.Log(texts.Length);
-		for (int i = 0; i < texts.Length; i++)
-		{
-			Debug.Log(i.ToString() + ": " + texts[i].text);
-		}
+		//Debug.Log(texts.Length);
+		//for (int i = 0; i < texts.Length; i++)
+		//{
+		//	Debug.Log(i.ToString() + ": " + texts[i].text);
+		//}
 	}
 
     // Update is called once per frame
