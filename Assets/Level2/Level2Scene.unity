@@ -1671,6 +1671,7 @@ GameObject:
   - component: {fileID: 1267127316}
   - component: {fileID: 1267127318}
   - component: {fileID: 1267127317}
+  - component: {fileID: 1267127319}
   m_Layer: 5
   m_Name: ButtonQuit
   m_TagString: Untagged
@@ -1751,6 +1752,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267127315}
   m_CullTransparentMesh: 1
+--- !u!114 &1267127319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267127315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d972aae23de42da8f4b2503acae38e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Assets/Home/HomeScene.unity
+  displayName: 
+  mode: 0
+  onDisplayNameChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1366932534
 GameObject:
   m_ObjectHideFlags: 0
