@@ -29,8 +29,8 @@ namespace TensorFlowLite
         public static bool is_set_frame = false;
         public static string detection_text;
         private Text[] text;
-
-        private void Start()
+		//AudioSource audioSource;
+		private void Start()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
         // This is an example usage of the NNAPI delegate.
@@ -81,10 +81,17 @@ namespace TensorFlowLite
 				text[0].text = "Search Object";
                 text[1].text = "Go Back";
             }
-
+			audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
+			//SpeakCommand();
 		}
-
-        private void OnDestroy()
+		//void SpeakCommand()
+		//{
+		//	if (LoginDirector.language == 0)
+		//		audioSource.PlayOneShot(TTS.GetAudio(0, "사물을 찾아보세요."));
+		//	else
+		//		audioSource.PlayOneShot(TTS.GetAudio(1, "Search Object"));
+		//}
+		private void OnDestroy()
         {
             GetComponent<WebCamInput>().OnTextureUpdate.RemoveListener(Invoke);
             ssd?.Dispose();
