@@ -27,9 +27,20 @@ public class AmendsDirector : MonoBehaviour
         GetImage();
         GameObject.Find("TextAmends").GetComponent<Text>().text = UserInfo.GetAmends().amends;
         GameObject.Find("ButtonBack").GetComponent<Button>().onClick.AddListener(GoBackToHome);
-    }
+		if (LoginDirector.language == 0) SetKorText();
+		else SetEngText();
 
-    void GoBackToHome()
+	}
+	void SetEngText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "We get present!");
+	}
+	void SetKorText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "선물을 받았어요!");
+	}
+
+	void GoBackToHome()
     {
         SceneManager.LoadScene("HomeScene");
         UserInfo.ResetAmendsRequest();

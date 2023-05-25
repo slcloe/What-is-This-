@@ -143,29 +143,43 @@ namespace TensorFlowLite
             //Debug.Log("cloe class id :  " + frame.text);
             //Debug.Log("cloe size x : y " + rt.sizeDelta.x + " "+ rt.sizeDelta.y);
             //Debug.Log("cloe anchoredPosition x : y" + rt.anchoredPosition.x + " " + rt.anchoredPosition.y);
-   //         float minX = rt.anchoredPosition.x;
-   //         float maxX = rt.anchoredPosition.x + rt.sizeDelta.x;
-   //         float minY = rt.anchoredPosition.y;
-   //         float maxY = rt.anchoredPosition.y - rt.sizeDelta.y;
-   //         if (minX < -689 || maxX > 68)
-   //         {
-			//	frame.gameObject.SetActive(false);
-			//	is_set_frame = false;
-			//	return;
-			//}
-   //         if (minY > 214 || maxY < -216)
-   //         {
-			//	frame.gameObject.SetActive(false);
-			//	is_set_frame = false;
-			//	return;
-			//}
-            if (rt.sizeDelta.x > 756 || rt.sizeDelta.y > 433)
-            {
+            float minX = rt.anchoredPosition.x;
+            float maxX = rt.anchoredPosition.x + rt.sizeDelta.x;
+            float minY = rt.anchoredPosition.y;
+            float maxY = rt.anchoredPosition.y - rt.sizeDelta.y;
+            //if (minX < -689 || maxX > 68)
+            //{
+            //    frame.gameObject.SetActive(false);
+            //    is_set_frame = false;
+            //    return;
+            //}
+            //if (minY > 214 || maxY < -216)
+            //{
+            //    frame.gameObject.SetActive(false);
+            //    is_set_frame = false;
+            //    return;
+            //}
+
+			if (maxX > 68)
+			{
 				frame.gameObject.SetActive(false);
 				is_set_frame = false;
 				return;
 			}
-        }
+			if (maxY < -220)
+			{
+				frame.gameObject.SetActive(false);
+				is_set_frame = false;
+				return;
+			}
+
+			//         if (rt.sizeDelta.x > 756 || rt.sizeDelta.y > 433)
+			//         {
+			//	frame.gameObject.SetActive(false);
+			//	is_set_frame = false;
+			//	return;
+			//}
+		}
 
         private string GetLabelName(int id)
         {

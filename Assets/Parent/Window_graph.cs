@@ -37,12 +37,12 @@ public class Window_graph : MonoBehaviour
 		ColorSet color2 = new ColorSet(255f / 255f, 192f / 255f, 0f / 255f, 1);
 		ColorSet color3 = new ColorSet(244f / 255f, 149f / 255f, 101f / 255f, 1);
 
-		ShowGraph(valueList,color1);
-		ShowGraph(valueList1,color2);
-		ShowGraph(valueList2, color3);
-		//ShowGraph(ParentDirector.successRate1, color1);
-		//ShowGraph(ParentDirector.successRate2, color2);
-		//ShowGraph(ParentDirector.successRate3, color3);
+		//ShowGraph(valueList,color1);
+		//ShowGraph(valueList1,color2);
+		//ShowGraph(valueList2, color3);
+		ShowGraph(ParentDirector.successRate1, color1);
+		ShowGraph(ParentDirector.successRate2, color2);
+		ShowGraph(ParentDirector.successRate3, color3);
 	}
 
 	private GameObject CreateCircle(Vector2 anchoredPosition)
