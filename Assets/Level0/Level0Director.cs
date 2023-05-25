@@ -44,7 +44,7 @@ public class Level0Director : MonoBehaviour
 	void SetKorText()
 	{
 		SetLanguage.SetTextContent(SetText.texts[1], "소리듣기");
-		SetLanguage.SetTextContent(SetText.texts[2], "이건 뭐지?");
+		SetLanguage.SetTextContent(SetText.texts[2], "이건 뭐지");
 		SetLanguage.SetTextContent(SetText.texts[3], "학습하러 가기");
 		SetLanguage.SetTextContent(SetText.texts[4], "그만할래요");
 	}
