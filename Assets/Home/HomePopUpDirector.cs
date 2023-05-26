@@ -41,7 +41,7 @@ public class HomePopUpDirector : MonoBehaviour
     Text text;
     InputField passwordInput;
 
-    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/plogin";
+    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com/plogin";
     void Start()
     {
         btExitPopUp = GameObject.Find("ButtonExitPopUp").GetComponent<Button>();

@@ -34,7 +34,7 @@ public class LoginDirector : MonoBehaviour
     InputField pwInput;
 	Button btLogin;
 
-    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/login";
+    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com/login";
 	public static int language = 0;
 	void Start()
     {

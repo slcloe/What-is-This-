@@ -115,7 +115,7 @@ public class ParentDirector : MonoBehaviour
 		info.member_idx = UserInfo.GetUserIdx();
 		info.older_date = older;
 		info.newer_date = newer;
-		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getAnalysis/date/between?member_idx=" + info.member_idx.ToString() + "&older_date="+info.older_date+"&newer_date="+info.newer_date;
+		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com/getAnalysis/date/between?member_idx=" + info.member_idx.ToString() + "&older_date="+info.older_date+"&newer_date="+info.newer_date;
 
 
 		string str = JsonUtility.ToJson(info);
