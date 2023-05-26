@@ -39,7 +39,7 @@ public class Level0Director : MonoBehaviour
 		SetLanguage.SetTextContent(SetText.texts[1], "Audio");
 		SetLanguage.SetTextContent(SetText.texts[2], "What is this?");
 		SetLanguage.SetTextContent(SetText.texts[3], "Next Step");
-		SetLanguage.SetTextContent(SetText.texts[4], "Stop learning");
+		SetLanguage.SetTextContent(SetText.texts[4], "Go back");
 	}
 	void SetKorText()
 	{
