@@ -29,7 +29,7 @@ public class SignUpDirector : MonoBehaviour
     List<string> monthList = new List<string>();
     List<string> dayList = new List<string>();
 
-    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/signup";
+    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com/signup";
 
     void Start()
     {

@@ -29,7 +29,7 @@ namespace TensorFlowLite
         public static bool is_set_frame = false;
         public static string detection_text;
         private Text[] text;
-
+		AudioSource audioSource;
         private void Start()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -81,8 +81,16 @@ namespace TensorFlowLite
 				text[0].text = "Search Object";
                 text[1].text = "Go Back";
             }
-
-		}
+            audioSource = GameObject.Find("SSD Sample").GetComponent<AudioSource>();
+            SpeakCommand();
+        }
+        void SpeakCommand()
+        {
+            if (LoginDirector.language == 0)
+                audioSource.PlayOneShot(TTS.GetAudio(0, "사물을 찾아보세요."));
+            else
+                audioSource.PlayOneShot(TTS.GetAudio(1, "Search Object"));
+        }
 
         private void OnDestroy()
         {
@@ -143,29 +151,43 @@ namespace TensorFlowLite
             //Debug.Log("cloe class id :  " + frame.text);
             //Debug.Log("cloe size x : y " + rt.sizeDelta.x + " "+ rt.sizeDelta.y);
             //Debug.Log("cloe anchoredPosition x : y" + rt.anchoredPosition.x + " " + rt.anchoredPosition.y);
-   //         float minX = rt.anchoredPosition.x;
-   //         float maxX = rt.anchoredPosition.x + rt.sizeDelta.x;
-   //         float minY = rt.anchoredPosition.y;
-   //         float maxY = rt.anchoredPosition.y - rt.sizeDelta.y;
-   //         if (minX < -689 || maxX > 68)
-   //         {
-			//	frame.gameObject.SetActive(false);
-			//	is_set_frame = false;
-			//	return;
-			//}
-   //         if (minY > 214 || maxY < -216)
-   //         {
-			//	frame.gameObject.SetActive(false);
-			//	is_set_frame = false;
-			//	return;
-			//}
-            if (rt.sizeDelta.x > 756 || rt.sizeDelta.y > 433)
-            {
+            float minX = rt.anchoredPosition.x;
+            float maxX = rt.anchoredPosition.x + rt.sizeDelta.x;
+            float minY = rt.anchoredPosition.y;
+            float maxY = rt.anchoredPosition.y - rt.sizeDelta.y;
+            //if (minX < -689 || maxX > 68)
+            //{
+            //    frame.gameObject.SetActive(false);
+            //    is_set_frame = false;
+            //    return;
+            //}
+            //if (minY > 214 || maxY < -216)
+            //{
+            //    frame.gameObject.SetActive(false);
+            //    is_set_frame = false;
+            //    return;
+            //}
+
+			if (maxX > 68)
+			{
 				frame.gameObject.SetActive(false);
 				is_set_frame = false;
 				return;
 			}
-        }
+			if (maxY < -220)
+			{
+				frame.gameObject.SetActive(false);
+				is_set_frame = false;
+				return;
+			}
+
+			//         if (rt.sizeDelta.x > 756 || rt.sizeDelta.y > 433)
+			//         {
+			//	frame.gameObject.SetActive(false);
+			//	is_set_frame = false;
+			//	return;
+			//}
+		}
 
         private string GetLabelName(int id)
         {

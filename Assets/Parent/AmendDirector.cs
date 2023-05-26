@@ -96,7 +96,7 @@ public class AmendDirector : MonoBehaviour
 		AmendUser info = new AmendUser();
 		info.member_idx = UserInfo.GetUserIdx();
 
-		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/getAmends?member_idx="+ info.member_idx;
+		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com/getAmends?member_idx="+ info.member_idx;
 
 		string str = JsonUtility.ToJson(info);
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(str);
@@ -124,7 +124,7 @@ public class AmendDirector : MonoBehaviour
 
 	void SendAmendInfo()
 	{
-		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/amends/update";
+		string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com/amends/update";
 
 		AmendInfo info = new AmendInfo();
 		info.idx = aminfo.idx;

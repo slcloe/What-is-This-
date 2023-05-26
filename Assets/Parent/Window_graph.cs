@@ -25,25 +25,28 @@ public class Window_graph : MonoBehaviour
 
 	private void Start()
 	{
-		//Debug.Log("graphdirector");
 		graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
 		labelTemplateX = graphContainer.Find("labelTemplateX").GetComponent<RectTransform>();
 		labelTemplateY = graphContainer.Find("labelTemplateY").GetComponent<RectTransform>();
 
-		List<float> valueList = new List<float>() { 5, 100, 56, 45, 30, 22, 33, 100 };
-		List<float> valueList1 = new List<float>() { 10, 20, 30, 40, 50, 60, 70, 80 };
-		List<float> valueList2 = new List<float>() { 7, 22, 40, 65, 55, 70, 80, 90 };
+		List<int> valueList = new List<int>() { 5, 100, 56, 45, 30, 22, 33, 100 };
+		List<int> valueList1 = new List<int>() { 10, 20, 30, 40, 50, 60, 70, 80 };
+		List<int> valueList2 = new List<int>() { 7, 22, 40, 65, 55, 70, 80, 90 };
 
-		//ColorSet color1 = new ColorSet(0,1,0,1);
-		//ColorSet color2 = new ColorSet(1,0,0,1);
 		ColorSet color1 = new ColorSet(130f / 255f, 169f / 255f, 102f / 255f, 1);
 		ColorSet color2 = new ColorSet(255f / 255f, 192f / 255f, 0f / 255f, 1);
 		ColorSet color3 = new ColorSet(244f / 255f, 149f / 255f, 101f / 255f, 1);
 
-		ShowGraph(valueList,color1);
-		ShowGraph(valueList1,color2);
-		ShowGraph(valueList2, color3);
+		//ShowGraph(valueList, color1);
+		//ShowGraph(valueList1, color2);
+		//ShowGraph(valueList2, color3);
+		for (int i = 0; i < 8; i++)
+		{
+			Debug.Log(ParentDirector.successRate1[i]);
+		}
 		ShowGraph(ParentDirector.successRate1, color1);
+		ShowGraph(ParentDirector.successRate2, color2);
+		ShowGraph(ParentDirector.successRate3, color3);
 	}
 
 	private GameObject CreateCircle(Vector2 anchoredPosition)
@@ -53,17 +56,17 @@ public class Window_graph : MonoBehaviour
 		gameObject.GetComponent<Image>().sprite = circleSprite;
 		RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 		rectTransform.anchoredPosition = anchoredPosition;
-		rectTransform.sizeDelta = new Vector2(11, 11);
+		rectTransform.sizeDelta = new Vector2(1, 1);
 		rectTransform.anchorMin = new Vector2(0, 0);
 		rectTransform.anchorMax = new Vector2(0, 0);
 		return gameObject;
 	}
 
-	private void ShowGraph(List<float> valueList, ColorSet color)
+	private void ShowGraph(List<int> valueList, ColorSet color)
 	{
 		float graphHeight = graphContainer.sizeDelta.y;
 		float yMaximum = 100f;
-		float xSize = 90f;
+		float xSize = 105f;
 
 		GameObject lastCircleGameObject = null;
 		for (int i = 0; i < valueList.Count; i++)
@@ -106,7 +109,7 @@ public class Window_graph : MonoBehaviour
 		float distance = Vector2.Distance(dotPositionA, dotPositionB);
 		rectTransform.anchorMin = new Vector2(0, 0);
 		rectTransform.anchorMax = new Vector2(0, 0);
-		rectTransform.sizeDelta = new Vector2(distance, 3f);
+		rectTransform.sizeDelta = new Vector2(distance, 6f);
 		rectTransform.anchoredPosition = dotPositionA + dir * distance * .5f;
 
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
