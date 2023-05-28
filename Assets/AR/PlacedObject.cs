@@ -149,10 +149,9 @@ public class PlacedObject : MonoBehaviour
                     Destroy(value);
 
                     Vars.Check_idx++;
-                    // if (TensorFlowLite.SsdSample.detection_text.Equals(curText + "\n" ))
 
-                    //  string word = TensorFlowLite.SsdSample.detection_text.Replace("\n", "");
-                    string word = "°ø";
+                    string word = TensorFlowLite.SsdSample.detection_text.Replace("\r", "");
+                    //string word = "°ø";
                      if (word.Equals(curText))
                     {
                         Level3Director.success = true;

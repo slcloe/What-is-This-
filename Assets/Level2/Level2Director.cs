@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class Level2Director : MonoBehaviour
 {
@@ -35,7 +36,6 @@ public class Level2Director : MonoBehaviour
         learning_word = GameObject.Find("TextWord").GetComponent<Text>();
         learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
-        word = word.Replace("\n", "");
         learning_word.text = word;
 
         int fontSize = 200;
@@ -90,7 +90,7 @@ public class Level2Director : MonoBehaviour
 				}
                 else
                 {
-                    popupDirector.ShowPopUp(result.Equals(word));
+                    popupDirector.ShowPopUp(Regex.Replace(result, @"\s", "").Equals(Regex.Replace(word, @"\s", "")));
                 }
             }
         }
