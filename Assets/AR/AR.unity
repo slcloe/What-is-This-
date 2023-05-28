@@ -686,7 +686,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD0A4\uBCF4"
+  m_Text: 
 --- !u!222 &394383123
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2224,8 +2224,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1974553137}
-  - component: {fileID: 1974553136}
   - component: {fileID: 1974553135}
+  - component: {fileID: 1974553136}
   m_Layer: 0
   m_Name: Director
   m_TagString: Untagged
@@ -2341,6 +2341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ee63e16b466594ebd6e800bc090d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupDirector: {fileID: 0}
   hearts:
   - {fileID: 948442738}
   - {fileID: 132363495}
@@ -2349,6 +2350,7 @@ MonoBehaviour:
   - {fileID: 1263275619}
   - {fileID: 644603253}
   - {fileID: 393826316}
+  life: 3
 --- !u!4 &1974553137
 Transform:
   m_ObjectHideFlags: 0

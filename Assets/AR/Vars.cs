@@ -6,16 +6,15 @@ public class Vars : MonoBehaviour
 {
     public static int SelectedLetter =0;
     public static int TotalWords = 20;
+    public static int FinalWords = 20;
 
-    public static string word = "키보드";
+    public static string word = "가방";
+    public static int[] AR_correct;
+    public static int Check_idx = 0;
+
+
     // Start is called before the first frame update
     void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }

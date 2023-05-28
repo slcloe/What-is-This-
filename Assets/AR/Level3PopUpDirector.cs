@@ -59,9 +59,9 @@ public class Level3PopUpDirector : MonoBehaviour
                 successFailure.text = "½ÇÆÐ!";
             else
                 successFailure.text = "fail!";
-            UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 2);
             ColorUtility.TryParseHtmlString("#E00010", out color);
             successFailure.color = color;
+            UserInfo.StudyWord(TensorFlowLite.SsdSample.detection_text.Replace("\r", ""), 2);
             textDirectionObject.SetActive(false);
             btNextObject.SetActive(false);
             Invoke("SwitchToFailure", 2);

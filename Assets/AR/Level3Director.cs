@@ -7,18 +7,24 @@ public class Level3Director : MonoBehaviour
 {
     AudioSource audioSource;
 
-    Level3PopUpDirector popupDirector;
+    public  Level3PopUpDirector popupDirector;
 
-    public GameObject[] hearts;
-    public GameObject[] brokenHearts;
+    public  GameObject[] hearts;
+    public  GameObject[] brokenHearts;
+	public  static Text curState;
 
-    int life = 3;
+    public int life = 3;
+    public static int calllife = 3;
+    public static bool success = false;
 
     void Start()
     {
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
         popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level3PopUpDirector>();
+		curState = GameObject.Find("TextBox").GetComponentInChildren<Text>();
 
+        curState.text = "";
+		life = 3;
         for (int i = 0; i < 3; i++) brokenHearts[i].SetActive(false);
         SpeakCommand();
 		if (LoginDirector.language == 0) SetKorText();
@@ -51,12 +57,29 @@ public class Level3Director : MonoBehaviour
 	void ReduceLife()
     {
         life--;
+        Debug.Log("LIFE : " + life.ToString()); 
         hearts[life].SetActive(false);
         brokenHearts[life].SetActive(true);
-        if(life == 0)
+        if(life <= 0)
         {
             popupDirector.ShowPopUp(false);
         }
     }
 
-}
+
+    void Update()
+    {
+        if (success)
+        {
+            popupDirector.ShowPopUp(true);
+        }
+
+        if (calllife < life)
+        {
+            ReduceLife();
+        }
+
+    }
+
+
+   }
