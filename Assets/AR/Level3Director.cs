@@ -9,6 +9,7 @@ public class Level3Director : MonoBehaviour
 
     public  Level3PopUpDirector popupDirector;
 
+    Button btSound;
     public  GameObject[] hearts;
     public  GameObject[] brokenHearts;
 	public  static Text curState;
@@ -22,10 +23,13 @@ public class Level3Director : MonoBehaviour
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
         popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level3PopUpDirector>();
 		curState = GameObject.Find("TextBox").GetComponentInChildren<Text>();
+        btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
 
         curState.text = "";
 		life = 3;
         for (int i = 0; i < 3; i++) brokenHearts[i].SetActive(false);
+
+        btSound.onClick.AddListener(SpeakSound);
         SpeakCommand();
 		if (LoginDirector.language == 0) SetKorText();
 		else SetEngText();
@@ -53,8 +57,12 @@ public class Level3Director : MonoBehaviour
 			audioSource.PlayOneShot(TTS.GetAudio(1, "Find hidden letters"));
 
 	}
+     void SpeakSound()
+    {
+        audioSource.PlayOneShot(TTS.GetAudio(0, TensorFlowLite.SsdSample.detection_text));
+    }
 
-	void ReduceLife()
+    void ReduceLife()
     {
         life--;
         Debug.Log("LIFE : " + life.ToString()); 
