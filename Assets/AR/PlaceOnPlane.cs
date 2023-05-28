@@ -21,8 +21,7 @@ public class PlaceOnPlane : MonoBehaviour
     private void Start()
     {
 
-        // Vars.word = TensorFlowLite.SsdSample.detection_text;
-        Vars.word = "°ø";
+        Vars.word = TensorFlowLite.SsdSample.detection_text;
         TensorFlowLite.Consonant cons = new TensorFlowLite.Consonant(Vars.word);
         Vars.AR_correct = cons.GetCorrectArray();
         Vars.TotalWords = Vars.AR_correct.Length;
