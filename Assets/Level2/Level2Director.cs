@@ -103,8 +103,8 @@ public class Level2Director : MonoBehaviour
 		if (LoginDirector.language == 0)
 			audioSource.PlayOneShot(TTS.GetAudio(0, "따라 말해보세요."));
         else
-			audioSource.PlayOneShot(TTS.GetAudio(1, "Listen and Repeat"));
-	}
+            audioSource.PlayOneShot(TTS.GetAudio(1, "Listen and Repeat"));
+    }
 
     void SpeakSound()
     {

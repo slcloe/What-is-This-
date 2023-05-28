@@ -37,14 +37,14 @@ public class Level0Director : MonoBehaviour
 	void SetEngText()
 	{
 		SetLanguage.SetTextContent(SetText.texts[1], "Audio");
-		SetLanguage.SetTextContent(SetText.texts[2], "What is this");
+		SetLanguage.SetTextContent(SetText.texts[2], "What is this?");
 		SetLanguage.SetTextContent(SetText.texts[3], "Next Step");
-		SetLanguage.SetTextContent(SetText.texts[4], "Stop learning");
+		SetLanguage.SetTextContent(SetText.texts[4], "Go back");
 	}
 	void SetKorText()
 	{
 		SetLanguage.SetTextContent(SetText.texts[1], "소리듣기");
-		SetLanguage.SetTextContent(SetText.texts[2], "이건 뭐지");
+		SetLanguage.SetTextContent(SetText.texts[2], "이건 뭐지?");
 		SetLanguage.SetTextContent(SetText.texts[3], "학습하러 가기");
 		SetLanguage.SetTextContent(SetText.texts[4], "그만할래요");
 	}

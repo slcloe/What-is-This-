@@ -34,7 +34,7 @@ public class LoginDirector : MonoBehaviour
     InputField pwInput;
 	Button btLogin;
 
-    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com:8081/login";
+    static private string apiUrl = "http://ec2-43-201-246-145.ap-northeast-2.compute.amazonaws.com/login";
 	public static int language = 0;
 	void Start()
     {
@@ -45,9 +45,11 @@ public class LoginDirector : MonoBehaviour
 
         btLogin.onClick.AddListener(CheckValidation);
 
-    }
 
-    void CheckValidation()
+	}
+	
+
+	void CheckValidation()
     {
         /*        if (idInput.text == "") Toast.MakeToast("아이디를 입력해주세요.");
                 else if (pwInput.text == "") Toast.MakeToast("비밀번호를 입력해주세요.");
