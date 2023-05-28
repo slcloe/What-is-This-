@@ -37,6 +37,11 @@ public class Level2Director : MonoBehaviour
 
         word = word.Replace("\n", "");
         learning_word.text = word;
+
+        int fontSize = 200;
+        if (word.Length > 3) fontSize -= (word.Length - 3) * 40;
+        learning_word.fontSize = fontSize;
+
         learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
         SetOnClickListener();
         SpeakCommand();

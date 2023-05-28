@@ -53,6 +53,9 @@ public class Level0Director : MonoBehaviour
         string getword = TensorFlowLite.SsdSample.detection_text;
         word = getword;
         textWord.text = word;
+        int fontSize = 300;
+        if (word.Length > 3) fontSize -= (word.Length - 3) * 40;
+        textWord.fontSize = fontSize;
     }
 
     void SetOnClickListener()
