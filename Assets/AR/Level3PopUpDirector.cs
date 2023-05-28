@@ -75,6 +75,6 @@ public class Level3PopUpDirector : MonoBehaviour
     }
     void GotoObjectDetection()
     {
-        SceneManager.LoadScene("SSD");
+        SceneManager.LoadScene("HomeScene");
     }
 }
