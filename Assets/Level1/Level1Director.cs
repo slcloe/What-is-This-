@@ -50,8 +50,6 @@ public class Level1Director : MonoBehaviour
 			SetKorText();
 		else
 			SetEngText();
-
-
 	}
 
     void SetKorText()

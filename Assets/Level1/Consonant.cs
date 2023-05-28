@@ -182,7 +182,34 @@ namespace TensorFlowLite
             }
             // idx : class public variable 로 수정해서 ref 변수로 쓰기
         }
+        public string GetCurrentState(int[] correct, int idx)
+        {
+            string state = "";
+            int i = 0;
+            for (; i < idx / 3; i++)
+            {
+                state += get_letter(correct[i * 3], correct[i * 3 + 1], correct[i * 3 + 2]);
+            }
+            if (idx % 3 == 0)
+            {
+                state += ('ㄱ' + correct[i * 3]);
+            }
+            else if (idx % 3 == 1)
+            {
+                state += get_letter(correct[i * 3], correct[i * 3 + 1], 0);
+            }
+            else
+            {
+                state += get_letter(correct[i * 3], correct[i * 3 + 1], correct[i * 3 + 2]);
+            }
+            return state;
+        }
 
+
+        char get_letter(int a, int b ,int c)
+        {
+            return (char)(a * 21 + b * 28 + c + 0xAC00);
+        }
 
     }
 }

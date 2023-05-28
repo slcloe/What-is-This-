@@ -78,11 +78,11 @@ public class Level2Director : MonoBehaviour
                 string result = STT.SendAudio(filePath);
                 if(result == null)
                 {
-                    if (LoginDirector.language == 0)
-                        audioSource.PlayOneShot(TTS.GetAudio(0, "다시 말해보세요."));
+					if (LoginDirector.language == 0)
+						audioSource.PlayOneShot(TTS.GetAudio(0, "다시 말해보세요"));
                     else
-                        audioSource.PlayOneShot(TTS.GetAudio(1, "Say it again"));
-                }
+						audioSource.PlayOneShot(TTS.GetAudio(1, "Say it again"));
+				}
                 else
                 {
                     popupDirector.ShowPopUp(result.Equals(word));
@@ -103,9 +103,7 @@ public class Level2Director : MonoBehaviour
 		if (LoginDirector.language == 0)
 			audioSource.PlayOneShot(TTS.GetAudio(0, "따라 말해보세요."));
         else
-        {
-            audioSource.PlayOneShot(TTS.GetAudio(1, "Repeat after me"));
-        }
+            audioSource.PlayOneShot(TTS.GetAudio(1, "Listen and Repeat"));
     }
 
     void SpeakSound()
