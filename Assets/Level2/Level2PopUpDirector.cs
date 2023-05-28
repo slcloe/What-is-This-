@@ -85,10 +85,10 @@ public class Level2PopUpDirector : MonoBehaviour
 
     void GotoLevel3()
     {
-        SceneManager.LoadScene("AR");
+        SceneManager.LoadScene("Level3Scene");
     }
     void GotoObjectDetection()
     { 
-        SceneManager.LoadScene("SSD");
+        SceneManager.LoadScene("HomeScene");
     }
 }
