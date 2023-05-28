@@ -38,15 +38,17 @@ public class Level3Director : MonoBehaviour
 	{
 		SetLanguage.SetTextContent(SetText.texts[0], "Find hidden letters");
 		SetLanguage.SetTextContent(SetText.texts[1], "Go Back");
-		SetLanguage.SetTextContent(SetText.texts[3], "Success!");
-		SetLanguage.SetTextContent(SetText.texts[4], "Go Back");
+		SetLanguage.SetTextContent(SetText.texts[3], "Audio");
+		SetLanguage.SetTextContent(SetText.texts[4], "Success!");
+		SetLanguage.SetTextContent(SetText.texts[5], "Go Back");
 	}
 	void SetKorText()
 	{
 		SetLanguage.SetTextContent(SetText.texts[0], "숨어 있는 글자를 찾아보세요");
 		SetLanguage.SetTextContent(SetText.texts[1], "그만할래요");
-		SetLanguage.SetTextContent(SetText.texts[3], "성공!");
-		SetLanguage.SetTextContent(SetText.texts[4], "처음으로");
+		SetLanguage.SetTextContent(SetText.texts[3], "소리 듣기");
+		SetLanguage.SetTextContent(SetText.texts[4], "성공!");
+		SetLanguage.SetTextContent(SetText.texts[5], "처음으로");
 	}
 
 	void SpeakCommand()
