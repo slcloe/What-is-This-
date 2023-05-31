@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class Level2Director : MonoBehaviour
 {
     AudioSource audioSource;
+    Level2PopUpDirector popupDirector;
 
     Button btSound;
     Button btSpeech;
     Image timer;
+    Image learning_img;
+    Text learning_word;
 
     private float time_start;
     private float time_current;
@@ -19,18 +23,50 @@ public class Level2Director : MonoBehaviour
     AudioClip recordClip = null;
 
     string filePath;
+    string word = TensorFlowLite.SsdSample.detection_text;
+
 
     void Start()
     {
         audioSource = GameObject.Find("Director").GetComponent<AudioSource>();
+        popupDirector = GameObject.Find("PopUpDirector").GetComponent<Level2PopUpDirector>();
         btSound = GameObject.Find("ButtonSound").GetComponent<Button>();
         btSpeech = GameObject.Find("ButtonSpeech").GetComponent<Button>();
         timer = GameObject.Find("Timer").GetComponent<Image>();
+        learning_word = GameObject.Find("TextWord").GetComponent<Text>();
+        learning_img = GameObject.Find("learning_img").GetComponent<Image>();
 
+        learning_word.text = word;
+
+        int fontSize = 200;
+        if (word.Length > 3) fontSize -= (word.Length - 3) * 40;
+        learning_word.fontSize = fontSize;
+
+        learning_img.sprite = TensorFlowLite.ScreenCapture.detection_image;
         SetOnClickListener();
         SpeakCommand();
-    }
-    void Update()
+		if (LoginDirector.language == 0) SetKorText();
+		else SetEngText();
+	}
+	void SetEngText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "Listen and Repeat");
+		SetLanguage.SetTextContent(SetText.texts[2], "Audio");
+		SetLanguage.SetTextContent(SetText.texts[3], "Record");
+		SetLanguage.SetTextContent(SetText.texts[4], "Success!");
+		SetLanguage.SetTextContent(SetText.texts[5], "Next Step");
+		SetLanguage.SetTextContent(SetText.texts[6], "Go Back");
+	}
+	void SetKorText()
+	{
+		SetLanguage.SetTextContent(SetText.texts[0], "Îî∞Îùº ÎßêÌï¥Î≥¥ÏÑ∏Ïöî");
+		SetLanguage.SetTextContent(SetText.texts[2], "ÏÜåÎ¶¨ Îì£Í∏∞");
+		SetLanguage.SetTextContent(SetText.texts[3], "ÎßêÌïòÍ∏∞");
+		SetLanguage.SetTextContent(SetText.texts[4], "ÏÑ±Í≥µ!");
+		SetLanguage.SetTextContent(SetText.texts[5], "Îã§Ïùå Îã®Í≥ÑÎ°ú");
+		SetLanguage.SetTextContent(SetText.texts[6], "Í∑∏ÎßåÌï†ÎûòÏöî");
+	}
+	void Update()
     {
         if (isRecording)
         {
@@ -44,7 +80,18 @@ public class Level2Director : MonoBehaviour
                 isRecording = false;
                 btSpeech.interactable = true;
                 StopRecording();
-                STT.SendAudio(filePath);
+                string result = STT.SendAudio(filePath);
+                if(result == null)
+                {
+					if (LoginDirector.language == 0)
+						audioSource.PlayOneShot(TTS.GetAudio(0, "Îã§Ïãú ÎßêÌï¥Î≥¥ÏÑ∏Ïöî"));
+                    else
+						audioSource.PlayOneShot(TTS.GetAudio(1, "Say it again"));
+				}
+                else
+                {
+                    popupDirector.ShowPopUp(Regex.Replace(result, @"\s", "").Equals(Regex.Replace(word, @"\s", "")));
+                }
             }
         }
 
@@ -58,22 +105,20 @@ public class Level2Director : MonoBehaviour
 
     void SpeakCommand()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("µ˚∂Û ∏ª«ÿ∫∏ººø‰."));
+		if (LoginDirector.language == 0)
+			audioSource.PlayOneShot(TTS.GetAudio(0, "Îî∞Îùº ÎßêÌï¥Î≥¥ÏÑ∏Ïöî."));
+        else
+            audioSource.PlayOneShot(TTS.GetAudio(1, "Listen and Repeat"));
     }
 
     void SpeakSound()
     {
-        audioSource.PlayOneShot(TTS.GetAudio("∞ÌæÁ¿Ã"));
+        audioSource.PlayOneShot(TTS.GetAudio(0, word));
     }
     void StartSpeech()
     {
-        //∏ª«œ±‚ πˆ∆∞ ∫Ò»∞º∫»≠
         btSpeech.interactable = false;
-
-        //≥Ï¿Ω Ω√¿€
         recordClip = Microphone.Start(Microphone.devices[0], false, 5, 16000);
-
-        //≈∏¿Ã∏” Ω√¿€Ω√∞£ º≥¡§
         ResetTimer();
     }
     void ResetTimer()
@@ -98,6 +143,4 @@ public class Level2Director : MonoBehaviour
             SavWav.Save(filePath, recordClip);
         }
     }
-
-
 }
