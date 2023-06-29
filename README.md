@@ -75,4 +75,13 @@ Unity / C#
 |---|---|---|
 |![image](https://github.com/Sao-jung-listens-well/WIT/assets/81304917/3358fd98-7cf2-4d7e-8e70-3ddf81c5aef9)|![image](https://github.com/Sao-jung-listens-well/WIT/assets/81304917/3af348f6-d043-4d2c-b137-c6b92f9e3cf1)|![image](https://github.com/Sao-jung-listens-well/WIT/assets/81304917/96bf1356-53dc-4b6a-b468-1a66fbf1abea)|  
 
+### 역할
+|이름|담당|
+|--|--|
+|이승재|프론트엔드 - AR|
+|한보은|프론트엔드 - UI / 음성인식|
+|김한슬|프론트엔드 - 사물인식|
+|박성하|백엔드|
+
+
 
